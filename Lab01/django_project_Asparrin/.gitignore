@@ -1,0 +1,20 @@
+# Ignorar caché de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Entorno virtual
+venv/
+env/
+
+# Archivos de configuración y base de datos local
+*.sqlite3
+.env
+.DS_Store
+
+# Archivos de logs
+logs/
+*.log
+
+# Archivos de sistema de Windows/macOS
+Thumbs.db
