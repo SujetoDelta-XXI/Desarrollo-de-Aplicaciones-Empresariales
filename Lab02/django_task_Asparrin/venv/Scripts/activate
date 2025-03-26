@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="A:\Desarrollo-de-Aplicaciones-Empresariales\django_task_Asparrin\venv"
+VIRTUAL_ENV="A:\Desarrollo-de-Aplicaciones-Empresariales\Lab02\django_task_Asparrin\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
