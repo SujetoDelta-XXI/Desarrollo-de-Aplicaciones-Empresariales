@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'tasks',
     'usuarios',
     "widget_tweaks",
+    "tasksville",
 ]
 
 MIDDLEWARE = [
