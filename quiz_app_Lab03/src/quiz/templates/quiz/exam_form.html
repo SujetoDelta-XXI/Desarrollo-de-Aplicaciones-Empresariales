@@ -3,6 +3,55 @@
 {% block title %}Crear Examen{% endblock %}
 
 {% block content %}
+<style>
+    body {
+        background: linear-gradient(135deg, #F3E9DC, #EADBC8);
+        font-family: 'Poppins', sans-serif;
+        color: #4A4A4A;
+    }
+    .card {
+        background: #FDF7F0;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border: none;
+    }
+    .card-header {
+        background: #EAD7C5;
+        color: #5A5A5A;
+        font-weight: bold;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+    .btn-primary {
+        background-color: #D4A373;
+        border-color: #D4A373;
+        font-weight: bold;
+    }
+    .btn-primary:hover {
+        background-color: #C98B62;
+        border-color: #C98B62;
+    }
+    .btn-secondary {
+        background-color: #B8C6A8;
+        border-color: #B8C6A8;
+        color: #4A4A4A;
+        font-weight: bold;
+    }
+    .btn-secondary:hover {
+        background-color: #A3B08A;
+        border-color: #A3B08A;
+    }
+    .form-label {
+        font-weight: bold;
+    }
+    input, textarea {
+        border-radius: 8px;
+        border: 1px solid #EAD7C5;
+        padding: 10px;
+        background-color: #F8F1E9;
+    }
+</style>
+
 <div class="row">
     <div class="col-md-8 offset-md-2">
         <div class="card">

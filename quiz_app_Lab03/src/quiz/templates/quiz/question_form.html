@@ -3,10 +3,46 @@
 {% block title %}Añadir Pregunta{% endblock %}
 
 {% block content %}
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .card-header {
+        background-color: #007bff;
+        color: white;
+        border-radius: 10px 10px 0 0;
+    }
+    .form-label {
+        font-weight: bold;
+    }
+    .alert-info {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border-color: #bee5eb;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    .btn-info {
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+    }
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+</style>
+
 <div class="row">
     <div class="col-md-10 offset-md-1">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header text-center">
                 <h2>Añadir Pregunta a: {{ exam.title }}</h2>
             </div>
             <div class="card-body">
@@ -22,22 +58,22 @@
                     </div>
                     
                     <h4 class="mt-4 mb-3">Opciones de respuesta</h4>
-                    <div class="alert alert-info">
+                    <div class="alert alert-info text-center">
                         Marca la casilla "Es correcta" en la opción que sea la respuesta correcta.
                     </div>
                     
                     {{ formset.management_form }}
                     <div id="options-container">
                         {% for choice_form in formset %}
-                            <div class="card mb-3">
+                            <div class="card mb-3 border-light">
                                 <div class="card-body">
-                                    <div class="row">
+                                    <div class="row align-items-center">
                                         <div class="col-md-9">
                                             <label class="form-label">Opción {{ forloop.counter }}</label>
                                             {{ choice_form.text }}
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-check mt-2">
+                                        <div class="col-md-3 text-center">
+                                            <div class="form-check">
                                                 {{ choice_form.is_correct }}
                                                 <label class="form-check-label" for="{{ choice_form.is_correct.id_for_label }}">
                                                     Es correcta
