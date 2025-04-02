@@ -4,12 +4,8 @@ from django.forms import inlineformset_factory
 from django.db import transaction
 from .models import Exam, Question, Choice
 from .forms import ExamForm, QuestionForm, ChoiceFormSet
-<<<<<<< HEAD
-from .forms import ChoiceForm
-=======
 from .forms import ChoiceForm 
 
->>>>>>> 1d2768af4c00bda3ee1b08b6e8b0ea2a6831eed0
 
 def exam_list(request):
     """Vista para listar todos los exámenes"""
@@ -87,11 +83,7 @@ def question_update(request, question_id):
     question = get_object_or_404(Question, id=question_id)
     exam = question.exam
     
-<<<<<<< HEAD
-    ChoiceFormSet = inlineformset_factory(Question, Choice, form=ChoiceForm, extra=0, can_delete=True)  # extra=0 evita agregar campos adicionales
-=======
     ChoiceFormSet = inlineformset_factory(Question, Choice, form=ChoiceForm, extra=0, can_delete=True)  # `extra=0` evita agregar campos adicionales
->>>>>>> 1d2768af4c00bda3ee1b08b6e8b0ea2a6831eed0
 
     if request.method == 'POST':
         question_form = QuestionForm(request.POST, instance=question)
@@ -132,8 +124,4 @@ def question_delete(request, question_id):
         return redirect('exam_detail', exam_id=exam.id)
     else:
         messages.error(request, 'Método no permitido para eliminar la pregunta.')
-<<<<<<< HEAD
         return redirect('exam_detail', exam_id=exam.id)
-=======
-        return redirect('exam_detail', exam_id=exam.id)
->>>>>>> 1d2768af4c00bda3ee1b08b6e8b0ea2a6831eed0
