@@ -41,6 +41,28 @@
         background-color: #b5d9f2;
         border-color: #b5d9f2;
     }
+    .btn-warning {
+        background-color: #ffc107;
+        border-color: #ffc107;
+        font-weight: bold;
+        border-radius: 8px;
+        color: #fff;
+    }
+    .btn-warning:hover {
+        background-color: #e0a800;
+        border-color: #d39e00;
+    }
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        font-weight: bold;
+        border-radius: 8px;
+        color: #fff;
+    }
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
     .accordion-button {
         background-color: #f8d7da;
         color: #6c757d;
@@ -100,6 +122,14 @@
                                         <li class="list-group-item">No hay opciones para esta pregunta.</li>
                                     {% endfor %}
                                 </ul>
+                                <!-- Botones de Actualizar y Eliminar -->
+                                <div class="mt-3">
+                                    <a href="{% url 'question_update' question.id %}" class="btn btn-warning">Actualizar</a>
+                                    <form action="{% url 'question_delete' question.id %}" method="post" style="display: inline-block;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

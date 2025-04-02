@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Actualizar Pregunta{% endblock %}
+{% block content %}
+<style>
+    /* Puedes reutilizar o ajustar los estilos según lo necesites */
+    .container {
+        max-width: 800px;
+        margin: auto;
+        background: rgba(255, 248, 240, 0.95);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+        color: #6c757d;
+        margin-bottom: 20px;
+    }
+    .btn-warning {
+        background-color: #ffc107;
+        border-color: #ffc107;
+        font-weight: bold;
+        border-radius: 8px;
+        color: #fff;
+    }
+    .btn-warning:hover {
+        background-color: #e0a800;
+        border-color: #d39e00;
+    }
+</style>
+
+<div class="container">
+    <h2>Actualizar Pregunta</h2>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Formulario de la pregunta -->
+        <div class="mb-3">
+            {{ question_form.non_field_errors }}
+            {{ question_form.as_p }}
+        </div>
+        
+        <!-- Formset de opciones -->
+        <div class="mb-3">
+            {{ formset.management_form }}
+            {% for form in formset %}
+                <div class="card mb-3 p-3">
+                    {{ form.non_field_errors }}
+                    {{ form.as_p }}
+                </div>
+            {% endfor %}
+        </div>
+        
+        <button type="submit" class="btn btn-warning">Actualizar</button>
+    </form>
+    <a href="{% url 'exam_detail' exam.id %}" class="btn btn-secondary mt-3">Cancelar</a>
+</div>
+{% endblock %}
