@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Jugar: {{ exam.title }}{% endblock %}
+
+{% block content %}
+  <h1>Jugar: {{ exam.title }}</h1>
+  <p>{{ exam.description }}</p>
+  <form id="examForm">
+    {% for question in questions %}
+      <div class="card mb-3 question-card" id="question-{{ question.id }}" style="background-color: white;">
+        <div class="card-header">
+          Pregunta {{ forloop.counter }}:
+        </div>
+        <div class="card-body">
+          <p class="question-text">{{ question.text }}</p>
+          <ul class="list-group">
+            {% for choice in question.choices.all %}
+              <li class="list-group-item choice-item"
+                  id="choice-{{ choice.id }}"
+                  data-choice-id="{{ choice.id }}"
+                  data-question-id="{{ question.id }}"
+                  data-is-correct="{{ choice.is_correct|yesno:'true,false' }}"
+                  style="background-color: white;">
+                <input type="radio" name="question-{{ question.id }}" value="{{ choice.id }}" class="me-2">
+                <span>{{ choice.text }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% endfor %}
+    <div class="text-center">
+      <button type="button" id="submitExam" class="btn btn-primary me-2">Enviar</button>
+      <button type="button" id="resetExam" class="btn btn-secondary">Reiniciar</button>
+    </div>
+  </form>
+
+  <script>
+    // Función para evaluar las respuestas del examen
+    document.getElementById('submitExam').addEventListener('click', function() {
+      // Recorremos cada pregunta
+      document.querySelectorAll('.question-card').forEach(function(questionCard) {
+        const questionId = questionCard.id.split('-')[1];
+        // Buscamos la opción seleccionada para esta pregunta
+        const selected = document.querySelector('input[name="question-' + questionId + '"]:checked');
+        // Obtenemos todos los elementos de alternativas para la pregunta
+        const choiceItems = questionCard.querySelectorAll('.choice-item');
+        
+        // Para cada alternativa, asignamos colores:
+        choiceItems.forEach(function(item) {
+          const isCorrect = item.getAttribute('data-is-correct') === 'true';
+          // Por defecto, la correcta en verde y las incorrectas en rojo
+          item.style.backgroundColor = isCorrect ? '#d4edda' : '#f8d7da';
+        });
+        
+        // Si se seleccionó una opción y es incorrecta, resaltar esa opción en azul claro
+        if(selected) {
+          const selectedChoiceId = selected.value;
+          // Verificamos si la opción seleccionada es incorrecta
+          const selectedItem = questionCard.querySelector('.choice-item[data-choice-id="' + selectedChoiceId + '"]');
+          if(selectedItem.getAttribute('data-is-correct') !== 'true') {
+            selectedItem.style.backgroundColor = '#cce5ff';
+          }
+        }
+      });
+    });
+
+    // Función para reiniciar el examen: limpiar las selecciones y restaurar el fondo blanco en las alternativas
+    document.getElementById('resetExam').addEventListener('click', function() {
+      document.getElementById('examForm').reset();
+      document.querySelectorAll('.choice-item').forEach(function(item) {
+        item.style.backgroundColor = 'white';
+      });
+    });
+  </script>
+{% endblock %}
+

@@ -22,6 +22,7 @@
                         <p class="card-text">{{ exam.description|truncatechars:100 }}</p>
                         <p class="text-muted">Preguntas: {{ exam.get_question_count }}</p>
                         <a href="{% url 'exam_detail' exam.id %}" class="btn btn-primary">Ver Detalles</a>
+                        <a href="{% url 'exam_play' exam.id %}" class="btn btn-success">Jugar</a>
                     </div>
                 </div>
             </div>

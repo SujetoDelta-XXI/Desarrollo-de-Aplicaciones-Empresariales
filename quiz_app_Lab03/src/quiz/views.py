@@ -69,3 +69,10 @@ def question_create(request, exam_id):
         'question_form': question_form,
         'formset': formset,
     })
+
+def exam_play(request, exam_id):
+    """Vista para jugar el examen"""
+    exam = get_object_or_404(Exam, id=exam_id)
+    questions = exam.questions.all().prefetch_related('choices')
+    # Aquí puedes agregar la lógica para mostrar una interfaz interactiva del examen.
+    return render(request, 'quiz/exam_play.html', {'exam': exam, 'questions': questions})
