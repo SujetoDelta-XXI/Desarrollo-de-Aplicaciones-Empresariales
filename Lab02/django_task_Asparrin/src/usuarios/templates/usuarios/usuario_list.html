@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            <h2>My User</h2>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{% url 'usuario_create' %}" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Add new User
+            </a>
+        </div>
+    </div>
+
+    <div class="row mt-3 mb-4">
+        <div class="col">
+            <form method="get" class="row g-3">
+                <div class="col-md-5">
+                    <label class="form-label">Estado:</label>
+                    <select name="estado" class="form-select" onchange="this.form.submit()">
+                        <option value="all" {% if stado_filter == 'all' or not status_filter %}selected{% endif %}>All</option>
+                        <option value="casado" {% if stado_filter == 'casado' %}selected{% endif %}>Casado</option>
+                        <option value="soltero" {% if stado_filter == 'soltero' %}selected{% endif %}>Soltero</option>
+                        <option value="divorciado" {% if stado_filter == 'divorciado' %}selected{% endif %}>Divorciado</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if usuarios %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Profesión</th>
+                        <th>Estado</th>
+                        <th>Special_Day</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                        <tr class="{% if usuario.estado == 'completed' %}usuario-completed{% else %}{% endif %}">
+                            <td>{{ usuario.nombre }}</td>
+                            <td>
+                                {% if usuario.estado == 'Casado' %}
+                                    <span class="badge bg-secondary">Casado</span>
+                                {% elif usuario.estado == 'Soltero' %}
+                                    <span class="badge bg-primary">Soltero</span>
+                                {% else %}
+                                    <span class="badge bg-success">Divorciado</span>
+                                {% endif %}
+                            </td>
+                            <td>{% if usuario.special_day %}{{ usuario.special_day }}{% else %}-{% endif %}</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="{% url 'usuario_update' task.id %}" class="btn btn-outline-primary">Edit</a>
+                                    <a href="{% url 'usuario_delete' task.id %}" class="btn btn-outline-danger">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            No User found. <a href="{% url 'usuario_create' %}">Create your first user</a>
+        </div>
+    {% endif %}
+{% endblock %}
