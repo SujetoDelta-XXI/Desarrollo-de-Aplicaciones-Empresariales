@@ -1,55 +1,120 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}{{ exam.title }}{% endblock %}
-
 {% block content %}
-<div class="row mb-4">
-    <div class="col-md-8">
-        <h1>{{ exam.title }}</h1>
-        <p>{{ exam.description }}</p>
-    </div>
-    <div class="col-md-4 text-end">
-        <a href="{% url 'question_create' exam.id %}" class="btn btn-primary">Añadir Pregunta</a>
-    </div>
-</div>
+<style>
+    body {
+        background: url("{% static 'images/background.jfif' %}") no-repeat center center fixed, #f8f9fa;
+        background-size: cover;
+        font-family: 'Poppins', sans-serif;
+        color: #444;
+    }
+    .container {
+        max-width: 900px;
+        margin: auto;
+        background: rgba(255, 248, 240, 0.95);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+        color: #6c757d;
+    }
+    .btn-primary {
+        background-color: #f5a623;
+        border-color: #f5a623;
+        font-weight: bold;
+        border-radius: 8px;
+    }
+    .btn-primary:hover {
+        background-color: #f8b74d;
+        border-color: #f8b74d;
+    }
+    .btn-secondary {
+        background-color: #9acfea;
+        border-color: #9acfea;
+        font-weight: bold;
+        border-radius: 8px;
+    }
+    .btn-secondary:hover {
+        background-color: #b5d9f2;
+        border-color: #b5d9f2;
+    }
+    .accordion-button {
+        background-color: #f8d7da;
+        color: #6c757d;
+        font-weight: bold;
+        border-radius: 6px;
+    }
+    .accordion-button:hover {
+        background-color: #f5c6cb;
+    }
+    .list-group-item-success {
+        background-color: #d4edda;
+        color: #155724;
+        border-radius: 6px;
+    }
+    .alert-info {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border-radius: 6px;
+    }
+    .badge.bg-success {
+        background-color: #28a745;
+        font-size: 0.85rem;
+    }
+</style>
 
-<div class="mb-4">
-    <h2>Preguntas</h2>
-    
-    {% if questions %}
-        <div class="accordion" id="accordionQuestions">
-            {% for question in questions %}
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ question.id }}">
-                            {{ forloop.counter }}. {{ question.text }}
-                        </button>
-                    </h2>
-                    <div id="collapse{{ question.id }}" class="accordion-collapse collapse" data-bs-parent="#accordionQuestions">
-                        <div class="accordion-body">
-                            <ul class="list-group">
-                                {% for choice in question.choices.all %}
-                                    <li class="list-group-item {% if choice.is_correct %}list-group-item-success{% endif %}">
-                                        {{ choice.text }} {% if choice.is_correct %}<span class="badge bg-success">Correcta</span>{% endif %}
-                                    </li>
-                                {% empty %}
-                                    <li class="list-group-item">No hay opciones para esta pregunta.</li>
-                                {% endfor %}
-                            </ul>
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1>{{ exam.title }}</h1>
+            <p>{{ exam.description }}</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{% url 'question_create' exam.id %}" class="btn btn-primary">Añadir Pregunta</a>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <h2>Preguntas</h2>
+        
+        {% if questions %}
+            <div class="accordion" id="accordionQuestions">
+                {% for question in questions %}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ question.id }}" aria-expanded="false" aria-controls="collapse{{ question.id }}">
+                                {{ forloop.counter }}. {{ question.text }}
+                            </button>
+                        </h2>
+                        <div id="collapse{{ question.id }}" class="accordion-collapse collapse" data-bs-parent="#accordionQuestions">
+                            <div class="accordion-body">
+                                <ul class="list-group">
+                                    {% for choice in question.choices.all %}
+                                        <li class="list-group-item {% if choice.is_correct %}list-group-item-success{% endif %}">
+                                            {{ choice.text }} {% if choice.is_correct %}<span class="badge bg-success">Correcta</span>{% endif %}
+                                        </li>
+                                    {% empty %}
+                                        <li class="list-group-item">No hay opciones para esta pregunta.</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <div class="alert alert-info">
-            Este examen no tiene preguntas todavía.
-            <a href="{% url 'question_create' exam.id %}">Añade la primera pregunta</a>
-        </div>
-    {% endif %}
-</div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                Este examen no tiene preguntas todavía.
+                <a href="{% url 'question_create' exam.id %}">Añade la primera pregunta</a>
+            </div>
+        {% endif %}
+    </div>
 
-<div>
-    <a href="{% url 'exam_list' %}" class="btn btn-secondary">Volver a la lista</a>
+    <div>
+        <a href="{% url 'exam_list' %}" class="btn btn-secondary">Volver a la lista</a>
+    </div>
 </div>
 {% endblock %}
