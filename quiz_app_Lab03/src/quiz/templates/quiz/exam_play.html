@@ -3,20 +3,19 @@
 {% block title %}Jugar: {{ exam.title }}{% endblock %}
 
 {% block content %}
-  <h1>Jugar: {{ exam.title }}</h1>
-  <p>{{ exam.description }}</p>
+  <h1 class="text-center text-dark">Jugar: {{ exam.title }}</h1>
+  <p class="text-center text-muted">{{ exam.description }}</p>
 
-  <!-- Contenedor para la alerta de puntaje -->
   <div id="scoreAlert" class="alert alert-success text-center d-none" role="alert"></div>
 
-  <form id="examForm">
+  <form id="examForm" class="container">
     {% for question in questions %}
-      <div class="card mb-3 question-card" id="question-{{ question.id }}" style="background-color: white;">
-        <div class="card-header">
-          Pregunta {{ forloop.counter }}:
+      <div class="card mb-3 question-card p-3" id="question-{{ question.id }}" style="background-color: #f8f1e4; border: 1px solid #d1bfa7;">
+        <div class="card-header bg-light text-dark border-bottom">
+          <strong>Pregunta {{ forloop.counter }}:</strong>
         </div>
         <div class="card-body">
-          <p class="question-text">{{ question.text }}</p>
+          <p class="question-text text-dark">{{ question.text }}</p>
           <ul class="list-group">
             {% for choice in question.choices.all %}
               <li class="list-group-item choice-item d-flex justify-content-between align-items-center"
@@ -24,7 +23,7 @@
                   data-choice-id="{{ choice.id }}"
                   data-question-id="{{ question.id }}"
                   data-is-correct="{{ choice.is_correct|yesno:'true,false' }}"
-                  style="background-color: white;">
+                  style="background-color: #fffaf0; border: 1px solid #d1bfa7;">
                 <div>
                   <input type="radio" name="question-{{ question.id }}" value="{{ choice.id }}" class="me-2">
                   <span>{{ choice.text }}</span>
@@ -45,9 +44,8 @@
   </form>
 
   <script>
-    // Función para evaluar las respuestas del examen
     document.getElementById('submitExam').addEventListener('click', function() {
-      let correctAnswers = 0; // Contador de respuestas correctas
+      let correctAnswers = 0;
       let totalQuestions = document.querySelectorAll('.question-card').length;
 
       document.querySelectorAll('.question-card').forEach(function(questionCard) {
@@ -55,7 +53,6 @@
         const selected = document.querySelector('input[name="question-' + questionId + '"]:checked');
         const choiceItems = questionCard.querySelectorAll('.choice-item');
         
-        // Buscar la alternativa correcta
         let correctChoiceItem = null;
         choiceItems.forEach(function(item) {
           if (item.getAttribute('data-is-correct') === 'true') {
@@ -63,10 +60,8 @@
           }
         });
 
-        // Restaurar el fondo de las alternativas
-        choiceItems.forEach(item => item.style.backgroundColor = 'white');
+        choiceItems.forEach(item => item.style.backgroundColor = '#fffaf0');
 
-        // Si se seleccionó una opción y es correcta, se incrementa el contador
         if (selected) {
           const selectedChoiceId = selected.value;
           if (correctChoiceItem && selectedChoiceId === correctChoiceItem.getAttribute('data-choice-id')) {
@@ -74,20 +69,17 @@
           }
         }
 
-        // Marcar la alternativa correcta: fondo verde y mostrar la etiqueta "Correcto"
         if (correctChoiceItem) {
           correctChoiceItem.style.backgroundColor = '#d4edda';
           correctChoiceItem.querySelector('.correct-label').classList.remove('d-none');
         }
 
-        // Marcar las alternativas incorrectas en rojo
         choiceItems.forEach(function(item) {
           if (item.getAttribute('data-is-correct') !== 'true') {
             item.style.backgroundColor = '#f8d7da';
           }
         });
 
-        // Si se seleccionó una opción incorrecta, marcarla en azul claro
         if (selected) {
           const selectedItem = questionCard.querySelector('.choice-item[data-choice-id="' + selected.value + '"]');
           if (selectedItem.getAttribute('data-is-correct') !== 'true') {
@@ -96,13 +88,11 @@
         }
       });
 
-      // Mostrar alerta con el puntaje en la parte superior
       const scoreAlert = document.getElementById('scoreAlert');
       scoreAlert.textContent = `Respondiste correctamente ${correctAnswers} de ${totalQuestions} preguntas.`;
       scoreAlert.classList.remove('d-none');
     });
 
-    // Botón "Ir al inicio" redirecciona inmediatamente a la página principal
     document.getElementById('goHome').addEventListener('click', function() {
       window.location.href = "/";
     });
