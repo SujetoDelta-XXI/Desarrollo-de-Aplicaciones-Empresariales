@@ -1,80 +1,81 @@
-# Desarrollo-de-Aplicaciones-Empresariales
-Repositorio de los laboratorios del curso Desarrollo de Aplicaciones Empresariales de la carrera de Diseño y Desarrollo de Software - Ciclo IV
+# Business Application Development
+Repository for the laboratory work of the Business Application Development course in the Software Design and Development program - Cycle IV
 
-# 📚 Users App – Gestión de Usuarios y Contenido Personalizado: 
+# 📚 Users App – User and Custom Content Management:
 
-La aplicación users es parte del proyecto de gestión de biblioteca y se encarga de:
+The Users app is part of the library management project and is responsible for:
 
-- Registrar nuevos usuarios utilizando un modelo de usuario extendido (LibraryUser)
-- Permitir el inicio y cierre de sesión
-- Mostrar el perfil personalizado del usuario
-- Gestionar listas de lectura personales
-- Crear y visualizar reseñas de libros
+-Registering new users using an extended user model (LibraryUser)
+-Allowing users to log in and log out
+-Displaying the user's customized profile
+-Managing personal reading lists
+-Creating and viewing book reviews
 
-## Requisitos previos:
+## Prerequisites:
 
-Antes de ejecutar esta app, asegúrate de tener:
+Before running this app, make sure you have:
 
-- Django instalado
-- La app library correctamente configurada
-- Las migraciones aplicadas
-- El modelo de usuario personalizado activo:
+-Django installed
+-The library app correctly configured
+-Migrations applied
+-The custom user model activated:
 
-En settings.py:
+In settings.py:
 ```python
 AUTH_USER_MODEL = 'users.LibraryUser'
 
-## Realizar las migraciones:
+## Run migrations:
 
 python manage.py makemigrations users
 python manage.py migrate
 
-## Ejecutar el proyecto
+## Run the project:
 
-python manage.py runserver  #En el directorio src
+python manage.py runserver  #In the src directory
 
 
-### Creación de usuario recomendadado:
+### Recommended user creation:
 
 User: SujetoDelta@
 Password: Django12345678
 
+------------------------------------------------------------------------
 
+# 📚 Library App – Book, Author, and Publication Management
 
-# 📚 Library App – Gestión de Libros, Autores y Publicaciones
-
-La aplicación `library` es el núcleo del sistema de gestión de biblioteca y tiene como objetivo principal manejar toda la información relacionada con libros, autores, editoriales, categorías y vistas de libros. Forma parte integral del proyecto de desarrollo de aplicaciones empresariales orientado a bibliotecas.
-
----
-
-## 🧩 Modelos y Relaciones
-
-La app implementa múltiples tipos de relaciones disponibles en Django:
-
-### 🔹 One-to-Many (ForeignKey)
-- Un **autor** puede escribir varios **libros**.
-- Una **categoría** puede estar asociada a muchos **libros**.
-
-### 🔹 One-to-One (OneToOneField)
-- Cada **autor** tiene un perfil único a través del modelo `AuthorProfile`.
-
-### 🔹 Many-to-Many (ManyToManyField)
-- Un **libro** puede pertenecer a múltiples **categorías**.
-
-### 🔹 Many-to-Many con tabla intermedia
-- La relación entre **libro** y **editorial** se maneja con una tabla intermedia llamada `Publication`, que también guarda campos como país y fecha de publicación.
+The library app is the core of the library management system and its primary goal is to manage all information related to books, authors, publishers, categories, and book views. It is an integral part of the Business Application Development project aimed at libraries.
 
 ---
 
-## 🛠️ Requisitos previos
+## 🧩 Models and Relationships
 
-Antes de usar esta app, asegúrate de tener:
+The app implements multiple types of relationships available in Django:
 
-- Python 
-- Django instalado
-- Proyecto Django inicializado
-- La app `users` configurada y activa (para estadísticas de vistas)
-- Base de datos configurada
+-One-to-Many (ForeignKey)
+-An author can write multiple books.
+
+-A category can be associated with many books.
+
+- One-to-One (OneToOneField)
+-Each author has a unique profile through the AuthorProfile model.
+
+- Many-to-Many (ManyToManyField)
+-A book can belong to multiple categories.
+
+- Many-to-Many with intermediate table
+The relationship between book and publisher is managed with an intermediate table called Publication, which also stores fields like country and publication date.
+
+---
+
+## 🛠️ Prerequisites
+
+Before using this app, ensure you have:
+
+-Python
+-Django installed
+-Django project initialized
+-The users app configured and active (for view statistics)
+-Database configured
 
 ---
 
