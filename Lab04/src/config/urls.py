@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('library.urls')),  # Incluir URLs de la app
     path('users/', include('users.urls')),
+    path('analytics/', include('analytics.urls')),
 ]
 
 # Servir archivos multimedia en modo desarrollo

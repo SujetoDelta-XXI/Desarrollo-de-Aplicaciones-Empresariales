@@ -1,0 +1,28 @@
+{% extends "analytics/base_analytics.html" %}
+{% block title %}Author Analytics | Analytics{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">👤 Author Analytics</h2>
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>Name</th>
+            <th>Total Views</th>
+            <th>Average Rating</th>
+            <th>Total Reviews</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for author in authors %}
+        <tr>
+            <td>{{ author.author.name }}</td>
+            <td>{{ author.total_views }}</td>
+            <td>{{ author.avg_rating }}</td>
+            <td>{{ author.total_reviews }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">No data available.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
