@@ -38,3 +38,6 @@ python manage.py runserver  #En el directorio src
 
 User: SujetoDelta@
 Password: Django12345678
+
+
+

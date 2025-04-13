@@ -1,46 +1,90 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
 
-{% block title %}Perfil de Usuario{% endblock %}
+{% block title %}Perfil de {{ user.username }}{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-  <h2>Perfil de {{ user.username }}</h2>
-  {% if user.profile_image %}
-    <img src="{{ user.profile_image.url }}" alt="Imagen de perfil" class="img-thumbnail" style="max-width: 150px;">
-  {% endif %}
-  <p><strong>Bio:</strong> {{ user.bio }}</p>
-  
-  <h3>Categorías Favoritas</h3>
-  <ul>
-    {% for category in user.favorite_categories.all %}
-      <li>{{ category.name }}</li>
-    {% empty %}
-      <li>No has seleccionado categorías favoritas.</li>
-    {% endfor %}
-  </ul>
-  
-  <h3>Listas de Lectura</h3>
-  <ul>
-    {% for rl in reading_lists %}
-      <li><a href="{% url 'reading_list_detail' rl.pk %}">{{ rl.name }}</a></li>
-    {% empty %}
-      <li>No tienes listas de lectura.</li>
-    {% endfor %}
-  </ul>
-  <a href="{% url 'reading_list_create' %}" class="btn btn-primary">Crear nueva lista de lectura</a>
-  
-  <h3>Reseñas</h3>
-  <ul>
-    {% for review in reviews %}
-      <li>
-        <a href="{% url 'review_detail' review.pk %}">
-          Reseña de <strong>{{ review.book.title }}</strong> - {{ review.rating }}/5
-        </a>
-      </li>
-    {% empty %}
-      <li>No has escrito reseñas.</li>
-    {% endfor %}
-  </ul>
-  <a href="{% url 'review_create' %}" class="btn btn-primary">Escribir una nueva reseña</a>
+<div class="container">
+
+  <!-- Fila 1: Perfil centrado -->
+  <div class="row mb-4">
+    <div class="col text-center">
+      <h2 class="mb-3">👤 Perfil de {{ user.username }}</h2>
+      {% if user.profile_image %}
+        <img src="{{ user.profile_image.url }}" alt="Imagen de perfil" class="rounded-circle mb-3" style="max-width:500px;">
+      {% endif %}
+      <p><strong>Biografía:</strong> {{ user.bio }}</p>
+      <p><strong>Correo:</strong> {{ user.email }}</p>
+    </div>
+  </div>
+
+  <!-- Fila 2: Categorías favoritas debajo del perfil -->
+  <div class="row mb-4">
+    <div class="col text-center">
+      <h4 class="mb-3">Categorías favoritas</h4>
+      {% if user.favorite_categories.all %}
+        <ul class="list-inline">
+          {% for cat in user.favorite_categories.all %}
+            <li class="list-inline-item badge bg-secondary me-1 mb-1">{{ cat.name }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No tienes categorías favoritas aún.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Fila 3: Tarjetas lado a lado -->
+  <div class="row">
+    <!-- Columna Izquierda: Listas de lectura -->
+    <div class="col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-header bg-info text-white">
+          <h5 class="card-title mb-0">📖 Mis Listas de Lectura</h5>
+        </div>
+        <div class="card-body">
+          {% if reading_lists %}
+            <ul class="list-group">
+              {% for rl in reading_lists %}
+                <li class="list-group-item">
+                  <strong>{{ rl.name }}</strong><br>
+                  <small>{{ rl.description }}</small>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted">No has creado listas de lectura todavía.</p>
+          {% endif %}
+          <a href="{% url 'reading_list_create' %}" class="btn btn-primary mt-3">Crear nueva lista</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Columna Derecha: Reseñas -->
+    <div class="col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-header bg-info text-white">
+          <h5 class="card-title mb-0">📝 Mis Reseñas</h5>
+        </div>
+        <div class="card-body">
+          {% if reviews %}
+            <ul class="list-group">
+              {% for rv in reviews %}
+                <li class="list-group-item">
+                  <strong>{{ rv.book.title }}</strong> 
+                  <span class="badge bg-secondary float-end">{{ rv.rating }}/5</span><br>
+                  <small>{{ rv.comment|truncatewords:15 }}</small>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted">No has escrito reseñas todavía.</p>
+          {% endif %}
+          <a href="{% url 'review_create' %}" class="btn btn-primary mt-3">Escribir nueva reseña</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 {% endblock %}
