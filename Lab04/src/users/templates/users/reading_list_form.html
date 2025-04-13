@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Nueva Lista de Lectura{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Crear Nueva Lista de Lectura</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </form>
+  <a href="{% url 'reading_list_list' %}" class="btn btn-secondary mt-2">Cancelar</a>
+</div>
+{% endblock %}

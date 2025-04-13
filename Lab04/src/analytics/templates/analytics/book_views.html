@@ -1,0 +1,16 @@
+{% extends "analytics/base_analytics.html" %}
+{% block content %}
+<h2>📖 Book Views</h2>
+<ul>
+  {% for view in views %}
+    {% if view.book %}
+      <li>{{ view.book.title }} — {{ view.timestamp }}</li>
+    {% else %}
+      <li>📕 Libro eliminado — {{ view.timestamp }}</li>
+    {% endif %}
+  {% empty %}
+    <li>No views recorded</li>
+  {% endfor %}
+</ul>
+{% endblock %}
+

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle de la Lista: {{ reading_list.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>{{ reading_list.name }}</h2>
+  <p>{{ reading_list.description }}</p>
+  <p><strong>Creada el:</strong> {{ reading_list.created_at|date:"d/m/Y" }}</p>
+  <p><strong>Visibilidad:</strong> {{ reading_list.is_public|yesno:"Pública,Privada" }}</p>
+  
+  <h3>Libros de la Lista</h3>
+  <ul>
+    {% for book in reading_list.books.all %}
+      <li>{{ book.title }}</li>
+    {% empty %}
+      <li>No hay libros en esta lista.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'reading_list_list' %}" class="btn btn-secondary">Volver a mis listas</a>
+</div>
+{% endblock %}

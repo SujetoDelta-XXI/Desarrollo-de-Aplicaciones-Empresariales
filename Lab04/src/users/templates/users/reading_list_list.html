@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Mis Listas de Lectura{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">📚 Mis Listas de Lectura</h2>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for rl in reading_lists %}
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">📖 {{ rl.name }}</h5>
+          <p class="card-text">
+            📅 Creada el: {{ rl.created_at|date:"d/m/Y" }}
+          </p>
+          <a href="{% url 'reading_list_detail' rl.pk %}" class="btn btn-primary">
+            Ver Detalles 👀
+          </a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <p class="card-text">No tienes listas de lectura creadas.</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="mt-4">
+    <a href="{% url 'reading_list_create' %}" class="btn btn-success">
+      ➕ Crear nueva lista de lectura
+    </a>
+  </div>
+</div>
+{% endblock %}
+

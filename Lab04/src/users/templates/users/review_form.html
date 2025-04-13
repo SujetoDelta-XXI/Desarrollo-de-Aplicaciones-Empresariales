@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Nueva Reseña{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Escribir Nueva Reseña</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Guardar Reseña</button>
+  </form>
+  <a href="{% url 'review_list' %}" class="btn btn-secondary mt-2">Cancelar</a>
+</div>
+{% endblock %}

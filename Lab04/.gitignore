@@ -1,0 +1,10 @@
+echo "__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+.vscode/
+db.sqlite3
+*.log
+local_settings.py
+media/" > .gitignore

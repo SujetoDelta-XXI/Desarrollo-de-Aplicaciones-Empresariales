@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Mis Reseñas{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">📝 Mis Reseñas</h2>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for review in reviews %}
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">📚 {{ review.book.title }}</h5>
+          <p class="card-text">
+            ⭐ Calificación: <strong>{{ review.rating }}/5</strong><br>
+            📅 Fecha: {{ review.created_at|date:"d/m/Y" }}
+          </p>
+          <a href="{% url 'review_detail' review.pk %}" class="btn btn-primary">
+            Ver Reseña 👀
+          </a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <p class="card-text">No has escrito reseñas.</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="mt-4">
+    <a href="{% url 'review_create' %}" class="btn btn-success">
+      ➕ Escribir una nueva reseña
+    </a>
+  </div>
+</div>
+{% endblock %}
