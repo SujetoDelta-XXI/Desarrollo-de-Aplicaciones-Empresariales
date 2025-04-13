@@ -86,4 +86,54 @@ python manage.py runserver
 
 #Att: Angeela-Lopeez
 
+# 📊 Analytics App – Book View & Usage Statistics
 
+The analytics app is part of the library management project and provides advanced data analysis features related to books, authors, and categories.
+
+This app was developed by Mathias Villena as part of the enterprise application development lab. 💻✨
+
+---
+
+## 🔍 What does this app do?
+
+It allows you to:
+
+- Display a dashboard with book view statistics
+- Show the top 5 most viewed books
+- Identify the most popular authors
+- Analyze the most viewed categories
+- Provide a beautiful and responsive web interface with customized CSS styling
+
+---
+
+## 📁 Structure
+
+The analytics app includes:
+
+- models.py → defines BookView and analytical models
+- views.py → handles business logic and data processing
+- urls.py → specific routes under /analytics/
+- templates/analytics/:
+  - base_analytics.html
+  - dashboard.html
+  - book_views.html
+  - author_analytics.html
+  - category_analytics.html
+
+---
+
+## ✅ Prerequisites
+
+Before running this app, make sure you have:
+
+- Django properly installed
+- The library app configured and populated with Book data
+- Registered users via the users app
+- Applied all required migrations
+- The custom user model set correctly
+
+In your settings.py:
+
+```python
+AUTH_USER_MODEL = 'users.LibraryUser'
+#Att: Mathias villena
