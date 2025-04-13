@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Mis Reseñas{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Mis Reseñas</h2>
+  <ul>
+    {% for review in reviews %}
+      <li>
+        <a href="{% url 'review_detail' review.pk %}">
+          Reseña de <strong>{{ review.book.title }}</strong> - {{ review.rating }}/5
+        </a> ({{ review.created_at|date:"d/m/Y" }})
+      </li>
+    {% empty %}
+      <li>No has escrito reseñas.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'review_create' %}" class="btn btn-primary">Escribir una nueva reseña</a>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+body {
+    background-color: #f4f4f9;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.container {
+    padding-top: 20px;
+}
+
+footer {
+    background-color: #f8f9fa;
+    padding: 10px 0;
+    text-align: center;
+}

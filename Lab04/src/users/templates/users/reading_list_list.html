@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Mis Listas de Lectura{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Mis Listas de Lectura</h2>
+  <ul>
+    {% for rl in reading_lists %}
+      <li><a href="{% url 'reading_list_detail' rl.pk %}">{{ rl.name }}</a> - {{ rl.created_at|date:"d/m/Y" }}</li>
+    {% empty %}
+      <li>No tienes listas de lectura creadas.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'reading_list_create' %}" class="btn btn-primary">Crear nueva lista de lectura</a>
+</div>
+{% endblock %}

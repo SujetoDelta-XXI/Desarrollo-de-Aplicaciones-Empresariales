@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Reseña: {{ review.book.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Reseña de {{ review.book.title }}</h2>
+  <p><strong>Calificación:</strong> {{ review.rating }}/5</p>
+  <p><strong>Comentario:</strong></p>
+  <p>{{ review.comment }}</p>
+  <p><small>Escrita el: {{ review.created_at|date:"d/m/Y" }}</small></p>
+  <a href="{% url 'review_list' %}" class="btn btn-secondary">Volver a mis reseñas</a>
+</div>
+{% endblock %}
