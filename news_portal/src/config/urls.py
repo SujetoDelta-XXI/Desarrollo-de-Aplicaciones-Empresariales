@@ -22,10 +22,15 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news.urls')),
+<<<<<<< HEAD
     path('accounts/', include('django.contrib.auth.urls')),  # Para login/logout
     path('', include('profiles.urls')),  # URLs de la app profiles
 ]
 
 # Servir archivos multimedia en desarrollo
+=======
+]
+
+>>>>>>> caf3d4b55e04671f3cdfb59724d526ecb203d800
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
