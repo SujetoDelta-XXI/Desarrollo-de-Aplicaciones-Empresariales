@@ -1,0 +1,350 @@
+{% extends "news/base.html" %}
+
+{% block title %}Mi Perfil - Django News Portal{% endblock %}
+
+{% block content %}
+<div class="profile">
+    <div class="profile__header">
+        <div class="profile__avatar">
+            {% if user.profile.avatar %}
+                <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}" class="profile__avatar-img">
+            {% else %}
+                <div class="profile__avatar-placeholder">{{ user.username|make_list|first|upper }}</div>
+            {% endif %}
+        </div>
+        <div class="profile__info">
+            <h1 class="profile__username">{{ user.username }}</h1>
+            <p class="profile__name">{{ user.get_full_name }}</p>
+            <p class="profile__email">{{ user.email }}</p>
+            {% if user.profile.bio %}
+                <p class="profile__bio">{{ user.profile.bio }}</p>
+            {% endif %}
+            <div class="profile__actions">
+                <a href="{% url 'profiles:edit_profile' %}" class="button">Editar Perfil</a>
+                <a href="{% url 'profiles:toggle_dark_mode' %}" class="button {% if user.profile.dark_mode %}button--light{% else %}button--dark{% endif %}" data-method="post">
+                    {% if user.profile.dark_mode %}
+                        Cambiar a Modo Claro
+                    {% else %}
+                        Cambiar a Modo Oscuro
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile__sections">
+        <div class="profile__section">
+            <h2 class="profile__section-title">Historial Reciente</h2>
+            {% if reading_history %}
+                <ul class="profile__list">
+                    {% for history in reading_history %}
+                        <li class="profile__list-item">
+                            <a href="{{ history.article.get_absolute_url }}" class="profile__link">
+                                {{ history.article.title }}
+                            </a>
+                            <span class="profile__meta">{{ history.read_at|date:"d M, Y H:i" }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <a href="{% url 'profiles:reading_history' %}" class="profile__more-link">Ver todo el historial</a>
+            {% else %}
+                <p class="profile__empty">No has leído ningún artículo aún.</p>
+            {% endif %}
+        </div>
+
+        <div class="profile__section">
+            <h2 class="profile__section-title">Artículos Guardados</h2>
+            {% if bookmarks %}
+                <ul class="profile__list">
+                    {% for bookmark in bookmarks|slice:":5" %}
+                        <li class="profile__list-item">
+                            <a href="{{ bookmark.article.get_absolute_url }}" class="profile__link">
+                                {{ bookmark.article.title }}
+                            </a>
+                            <button class="profile__bookmark-remove" data-id="{{ bookmark.id }}" aria-label="Quitar de favoritos">×</button>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% if bookmarks.count > 5 %}
+                    <a href="{% url 'profiles:bookmarks' %}" class="profile__more-link">Ver todos los guardados ({{ bookmarks.count }})</a>
+                {% endif %}
+            {% else %}
+                <p class="profile__empty">No has guardado ningún artículo aún.</p>
+            {% endif %}
+        </div>
+        
+        <div class="profile__section">
+            <h2 class="profile__section-title">Categorías Suscritas</h2>
+            {% if subscriptions %}
+                <ul class="profile__categories">
+                    {% for subscription in subscriptions %}
+                        <li class="profile__category-item">
+                            <a href="{{ subscription.category.get_absolute_url }}" class="profile__category-link">
+                                {{ subscription.category.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="profile__empty">No estás suscrito a ninguna categoría.</p>
+            {% endif %}
+            <a href="{% url 'profiles:manage_subscriptions' %}" class="button button--small">Gestionar Suscripciones</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .profile {
+        background-color: var(--color-dark-lighter);
+        border-radius: 4px;
+        padding: 2rem;
+    }
+    
+    .profile__header {
+        display: flex;
+        margin-bottom: 2rem;
+    }
+    
+    .profile__avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 2rem;
+        background-color: var(--color-primary);
+    }
+    
+    .profile__avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .profile__avatar-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: white;
+    }
+    
+    .profile__info {
+        flex-grow: 1;
+    }
+    
+    .profile__username {
+        margin: 0 0 0.5rem 0;
+        color: var(--color-primary);
+    }
+    
+    .profile__name, .profile__email {
+        margin: 0.25rem 0;
+        color: var(--color-text-muted);
+    }
+    
+    .profile__bio {
+        margin: 1rem 0;
+        font-style: italic;
+    }
+    
+    .profile__actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .button {
+        padding: 0.5rem 1rem;
+        background-color: var(--color-primary);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        cursor: pointer;
+    }
+    
+    .button--small {
+        padding: 0.25rem 0.75rem;
+        font-size: 0.8rem;
+    }
+    
+    .button--dark {
+        background-color: #333;
+    }
+    
+    .button--light {
+        background-color: #e0e0e0;
+        color: #333;
+    }
+    
+    .profile__sections {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    
+    .profile__section {
+        background-color: var(--color-dark);
+        border-radius: 4px;
+        padding: 1.5rem;
+    }
+    
+    .profile__section-title {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        color: var(--color-primary);
+        border-bottom: 1px solid var(--color-secondary);
+        padding-bottom: 0.5rem;
+    }
+    
+    .profile__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .profile__list-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .profile__list-item:last-child {
+        border-bottom: none;
+    }
+    
+    .profile__bookmark-remove {
+        background: none;
+        border: none;
+        color: var(--color-danger, #ff4d4d);
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 0 0.5rem;
+    }
+    
+    .profile__link {
+        color: var(--color-text);
+        text-decoration: none;
+        flex-grow: 1;
+    }
+    
+    .profile__link:hover {
+        color: var(--color-primary);
+    }
+    
+    .profile__meta {
+        color: var(--color-text-muted);
+        font-size: 0.8rem;
+        margin-left: 1rem;
+    }
+    
+    .profile__more-link {
+        display: block;
+        text-align: center;
+        margin-top: 1rem;
+        color: var(--color-primary);
+        text-decoration: none;
+    }
+    
+    .profile__empty {
+        color: var(--color-text-muted);
+        font-style: italic;
+    }
+    
+    .profile__categories {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1rem 0;
+    }
+    
+    .profile__category-item {
+        background-color: var(--color-dark-lighter);
+        border-radius: 4px;
+        padding: 0.25rem 0.75rem;
+    }
+    
+    .profile__category-link {
+        color: var(--color-primary);
+        text-decoration: none;
+    }
+    
+    @media (max-width: 768px) {
+        .profile__header {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .profile__avatar {
+            margin-right: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .profile__sections {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Eliminar marcador con AJAX
+        document.querySelectorAll('.profile__bookmark-remove').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const bookmarkId = this.dataset.id;
+                const listItem = this.closest('.profile__list-item');
+                
+                fetch(`/profile/bookmarks/remove/${bookmarkId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        listItem.remove();
+                        
+                        // Comprobar si no quedan marcadores
+                        const bookmarksList = document.querySelector('.profile__list');
+                        if (bookmarksList && bookmarksList.children.length === 0) {
+                            bookmarksList.insertAdjacentHTML('beforebegin', '<p class="profile__empty">No has guardado ningún artículo aún.</p>');
+                            bookmarksList.remove();
+                            
+                            // Eliminar enlace "Ver todos"
+                            const moreLink = document.querySelector('.profile__more-link');
+                            if (moreLink) moreLink.remove();
+                        }
+                    }
+                });
+            });
+        });
+        
+        // Función para obtener el token CSRF
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    });
+</script>
+{% endblock %}
