@@ -21,4 +21,24 @@
         </div>
     </article>
 {% endblock %}
+<h3>Comentarios</h3>
+{% for comment in comments %}
+    <div>
+        <strong>{{ comment.user.username }}</strong> <em>{{ comment.created_at }}</em>
+        <p>{{ comment.content }}</p>
+    </div>
+{% empty %}
+    <p>No hay comentarios aún.</p>
+{% endfor %}
+
+{% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Comentar</button>
+    </form>
+{% else %}
+    <p><a href="{% url 'login' %}">Inicia sesión</a> para comentar.</p>
+{% endif %}
+
 

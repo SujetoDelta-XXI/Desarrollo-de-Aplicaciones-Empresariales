@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Article, Category
+from .models import Article, Comment
+from .forms import CommentForm
 
 
 class ArticleListView(ListView):
@@ -41,3 +43,24 @@ class ArticleDetailView(DetailView):
             status="published"
         ).order_by("-published_date")[:5]
         return context
+
+def article_detail(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    comments = article.comments.all().order_by('-created_at')
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.article = article
+            new_comment.user = request.user
+            new_comment.save()
+            return redirect('article_detail', pk=pk)
+    else:
+        form = CommentForm()
+
+    return render(request, 'news/article_detail.html', {
+        'article': article,
+        'comments': comments,
+        'form': form
+    })

@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
@@ -54,4 +52,13 @@ class Article(models.Model):
     
     def get_absolute_url(self):
         return reverse("news:article_detail", kwargs={"slug": self.slug})
->>>>>>> 14395f35ddc1d61288e7aa46023521ffe25a5e4f
+    
+
+class Comment(models.Model):
+    article = models.ForeignKey('Article', on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Comment by {self.user.username} on {self.article.title}'
