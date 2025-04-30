@@ -7,11 +7,7 @@ class PostManager(models.Manager):
     """Custom manager for Post model"""
     
     def published(self):
-        """Return only published posts"""
-        return self.filter(
-            status='published',
-            published_at__lte=timezone.now()
-        )
+        return self.filter(status='published', published_at__lte=timezone.now())
     
     def drafts(self):
         """Return only draft posts"""
@@ -33,9 +29,17 @@ class PostManager(models.Manager):
         """Return posts with their comment counts"""
         return self.annotate(total_comments=Count('comments'))
     
-    def recent_posts(self, count=5):
-        """Return most recent posts"""
-        return self.published().order_by('-published_at')[:count]
+    def recent_posts(self): # Cambiado el nombre para mayor claridad
+        # Devuelve el queryset ordenado, sin aplicar slice
+        return self.published().order_by('-published_at')
+    
+    def recent_posts(self):
+        # Devuelve el queryset ordenado, sin aplicar slice
+        return self.published().order_by('-published_at')
+
+    def recent_posts_list(self, count=10): # Nuevo método para la vista de lista
+        """Return the most recent published posts with slice"""
+        return self.recent_posts()[:count]
     
     def popular_posts(self, count=5):
         """Return posts with most comments"""

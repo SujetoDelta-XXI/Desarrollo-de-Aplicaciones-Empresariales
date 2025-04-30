@@ -26,7 +26,11 @@ class PostListView(ListView):
         context['tags'] = Tag.objects.annotate(
             posts_count=Count('posts')
         ).order_by('-posts_count')[:10]
-        context['recent_posts'] = Post.blog_objects.recent_posts()
+
+        # MODIFICACIÓN AQUÍ:
+        # Usa el nuevo método del manager que ya incluye el slice
+        context['recent_posts'] = Post.blog_objects.recent_posts_list()
+
         return context
 
 
@@ -40,6 +44,7 @@ class PostDetailView(DetailView):
         """Ensure we only show published posts"""
         return Post.blog_objects.published()
     
+    
     def get_context_data(self, **kwargs):
         """Add additional context data"""
         context = super().get_context_data(**kwargs)
@@ -48,9 +53,11 @@ class PostDetailView(DetailView):
         context['tags'] = Tag.objects.annotate(
             posts_count=Count('posts')
         ).order_by('-posts_count')[:10]
+
         context['recent_posts'] = Post.blog_objects.recent_posts().exclude(
             id=self.object.id
-        )
+        )[:10]
+
         return context
 
 
