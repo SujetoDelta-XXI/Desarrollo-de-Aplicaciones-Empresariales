@@ -105,6 +105,12 @@ body {
 .post__link {
     color: var(--color-primary);
     text-decoration: none;
+    transition: color 0.3s ease; /* Agregamos una transición suave */
+}
+
+.post__link:hover {
+    color: var(--color-secondary); /* Cambia el color al pasar el ratón */
+    text-decoration: underline; /* Subraya el texto al pasar el ratón */
 }
 
 .post__meta {
