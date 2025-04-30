@@ -1,20 +1,20 @@
-css
 :root {
-    /* Color variables */
-    --color-primary: #23B5E8;
-    --color-secondary: #234B96;
-    --color-success: #23B58B;
-    --color-warning: #E8B523;
-    --color-danger: #E23B58;
-    --color-black: #010508;
-    --color-white: #F1F5F8;
+    /* Color variables - Spring Tones */
+    --color-primary: #8BC34A; /* Light Green */
+    --color-secondary: #FFEB3B; /* Yellow */
+    --color-success: #4CAF50; /* Green */
+    --color-warning: #FFC107; /* Amber */
+    --color-danger: #F44336; /* Red */
+    --color-black: #212121; /* Dark Grey */
+    --color-white: #E8F5E9; /* Lightest Green */
+    --color-text: #424242; /* Dark Grey for text */
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: var(--color-white);
-    background-color: var(--color-black);
+    color: var(--color-text); /* Use text color variable */
+    background-color: var(--color-white); /* Use white variable */
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
@@ -22,7 +22,7 @@ body {
 
 /* Header styling */
 .header {
-    background-color: #121212;
+    background-color: #DCEDC8; /* Lighter Green */
     padding: 1rem;
     margin-bottom: 1.5rem;
     border-bottom: 2px solid var(--color-primary);
@@ -48,7 +48,7 @@ body {
 }
 
 .header__nav-link {
-    color: var(--color-white);
+    color: var(--color-text); /* Use text color variable */
     text-decoration: none;
     padding: 0.5rem;
     border-radius: 4px;
@@ -57,7 +57,7 @@ body {
 
 .header__nav-link:hover {
     background-color: var(--color-primary);
-    color: var(--color-black);
+    color: var(--color-white); /* Use white variable */
 }
 
 /* Layout styling */
@@ -75,7 +75,7 @@ body {
 .layout__sidebar {
     flex: 1;
     min-width: 250px;
-    background-color: #1E1E1E;
+    background-color: #DCEDC8; /* Lighter Green */
     padding: 1rem;
     border-radius: 4px;
     align-self: flex-start;
@@ -83,7 +83,7 @@ body {
 
 /* Post styling */
 .post {
-    background-color: #1E1E1E;
+    background-color: #F1F8E9; /* Very Light Green */
     border-left: 3px solid var(--color-primary);
     padding: 1.5rem;
     margin-bottom: 1.5rem;
@@ -93,7 +93,7 @@ body {
 
 .post:hover {
     transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjusted shadow for lighter background */
 }
 
 .post__title {
@@ -108,7 +108,7 @@ body {
 }
 
 .post__meta {
-    color: #AAAAAA;
+    color: #757575; /* Darker Grey */
     font-size: 0.9rem;
     margin-bottom: 1rem;
     display: flex;
@@ -138,7 +138,7 @@ body {
 /* Tag styling */
 .tag {
     background-color: var(--color-secondary);
-    color: var(--color-white);
+    color: var(--color-text); /* Use text color variable */
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
     font-size: 0.8rem;
@@ -148,7 +148,7 @@ body {
 
 .tag:hover {
     background-color: var(--color-primary);
-    color: var(--color-black);
+    color: var(--color-white); /* Use white variable */
 }
 
 /* Comment styling */
@@ -157,14 +157,14 @@ body {
 }
 
 .comment {
-    background-color: #121212;
+    background-color: #DCEDC8; /* Lighter Green */
     padding: 1rem;
     margin-bottom: 1rem;
     border-radius: 4px;
 }
 
 .comment__meta {
-    color: #AAAAAA;
+    color: #757575; /* Darker Grey */
     font-size: 0.8rem;
     margin-bottom: 0.5rem;
 }
@@ -196,7 +196,7 @@ body {
 }
 
 .sidebar__link {
-    color: var(--color-white);
+    color: var(--color-text); /* Use text color variable */
     text-decoration: none;
     padding: 0.25rem 0;
     display: block;
@@ -210,8 +210,8 @@ body {
 
 /* Footer styling */
 .footer {
-    background-color: #121212;
-    color: #AAAAAA;
+    background-color: #DCEDC8; /* Lighter Green */
+    color: #757575; /* Darker Grey */
     padding: 1.5rem;
     margin-top: 3rem;
     text-align: center;
@@ -228,8 +228,8 @@ body {
 }
 
 .pagination__link {
-    background-color: #121212;
-    color: var(--color-white);
+    background-color: #DCEDC8; /* Lighter Green */
+    color: var(--color-text); /* Use text color variable */
     padding: 0.5rem 1rem;
     border-radius: 4px;
     text-decoration: none;
@@ -238,16 +238,17 @@ body {
 
 .pagination__link:hover {
     background-color: var(--color-secondary);
+    color: var(--color-text); /* Use text color variable */
 }
 
 .pagination__link--active {
     background-color: var(--color-primary);
-    color: var(--color-black);
+    color: var(--color-white); /* Use white variable */
 }
 
 /* Form styling */
 .form {
-    background-color: #1E1E1E;
+    background-color: #F1F8E9; /* Very Light Green */
     padding: 1.5rem;
     border-radius: 4px;
     margin-bottom: 1.5rem;
@@ -266,16 +267,16 @@ body {
 .form__label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--color-white);
+    color: var(--color-text); /* Use text color variable */
 }
 
 .form__input,
 .form__textarea {
     width: 100%;
     padding: 0.5rem;
-    background-color: #121212;
-    border: 1px solid #333;
-    color: var(--color-white);
+    background-color: #DCEDC8; /* Lighter Green */
+    border: 1px solid #A5D6A7; /* Medium Green */
+    color: var(--color-text); /* Use text color variable */
     border-radius: 4px;
 }
 
@@ -286,7 +287,7 @@ body {
 
 .form__button {
     background-color: var(--color-primary);
-    color: var(--color-black);
+    color: var(--color-white); /* Use white variable */
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -296,7 +297,7 @@ body {
 
 .form__button:hover {
     background-color: var(--color-secondary);
-    color: var(--color-white);
+    color: var(--color-text); /* Use text color variable */
 }
 
 /* Responsive design */
@@ -304,12 +305,12 @@ body {
     .layout {
         flex-direction: column;
     }
-    
+
     .layout__main,
     .layout__sidebar {
         width: 100%;
     }
-    
+
     .header__nav-list {
         flex-direction: column;
     }
