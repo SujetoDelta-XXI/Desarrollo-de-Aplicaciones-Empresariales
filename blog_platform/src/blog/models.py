@@ -52,7 +52,7 @@ class Post(models.Model):
         ('draft', 'Draft'),
         ('published', 'Published'),
     )
-    
+  
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, max_length=200)
     content = models.TextField()
