@@ -1,6 +1,13 @@
 Quiz API Project
 Descripción General
 
+SUPER USER-ADMIN: angeela
+PASSWORD: angeela
+
+SUPER USER-ADMIN: Tecsup
+PASSWORD: Tecsup
+
+
 Este proyecto es una API de Quizzes desarrollada con Django y Django REST Framework. Permite crear quizzes, agregar preguntas y opciones, validar respuestas y gestionar usuarios con perfiles y registros de intentos. Además, incluye aplicaciones adicionales para extender la funcionalidad.
 
 Instrucciones para Ejecutar el Proyecto
