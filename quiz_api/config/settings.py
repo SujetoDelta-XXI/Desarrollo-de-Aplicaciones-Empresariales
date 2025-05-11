@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     # Apps locales
     "quizzes",
     "users",
+    "analytics",
 ]
 
 MIDDLEWARE = [

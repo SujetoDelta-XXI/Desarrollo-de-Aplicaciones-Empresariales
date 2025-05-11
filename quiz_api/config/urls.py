@@ -7,5 +7,6 @@ urlpatterns = [
     path("api/", include("quizzes.urls")),
     path("api-auth/", include("rest_framework.urls")),
     path('api/users/', include('users.urls')),
+    path("api/analytics/", include("analytics.urls")), 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
