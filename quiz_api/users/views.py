@@ -7,7 +7,13 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 class QuizAttemptViewSet(viewsets.ModelViewSet):
     queryset = QuizAttempt.objects.all()
     serializer_class = QuizAttemptSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
