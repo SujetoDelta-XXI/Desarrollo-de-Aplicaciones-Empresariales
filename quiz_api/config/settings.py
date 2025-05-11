@@ -28,11 +28,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Terceros
     "rest_framework",
+    "django_filters",
 
     # Apps locales
     "quizzes",
+    "category_tags",
     "users",
     "analytics",
+
 ]
 
 MIDDLEWARE = [
@@ -94,6 +97,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+QUIZZES_API_BASE_URL = "http://127.0.0.1:8000/api/"
+CATEGORY_TAGS_BASE_URL = "http://127.0.0.1:8000/api/category_tags/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
