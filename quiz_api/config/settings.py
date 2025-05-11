@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "quizzes",
     "category_tags",
     "users",
+    "analytics",
 
 ]
 
