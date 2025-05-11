@@ -112,13 +112,14 @@ name (nombre de la etiqueta)
 Relaciones:
 
 Los quizzes pueden pertenecer a una categoría y tener múltiples etiquetas.
+
 3. Quiz Analytics System
 
 Autor: Angela Lopez
 
 Permite analizar el desempeño de los quizzes y preguntas, mostrando estadísticas de intentos y tasas de éxito.
 
-Modelo QuestionStat:
+1. Modelo QuestionStat:
 
 question (pregunta relacionada)
 
@@ -128,7 +129,7 @@ correct_attempts (número de respuestas correctas)
 
 success_rate (tasa de éxito)
 
-Modelo QuizActivity:
+2. Modelo QuizActivity:
 
 quiz (quiz relacionado)
 
@@ -139,6 +140,26 @@ views (vistas)
 starts (inicios)
 
 completions (finalizaciones)
+
+Endpoint general:
+/api/analytics/
+
+Endpoints REST ([/api/analytics/](http://127.0.0.1:8000/api/analytics/)):
+
+QuizActivity
+
+| Método | Ruta                | Descripción                  |
+| ------ | ------------------- | ---------------------------- |
+| GET    | /quiz-activities/   | Listar todas las actividades |
+| POST   | /quiz-activities/   | Crear un nuevo registro      |
+
+QuestionStat
+
+| Método | Ruta               | Descripción                          |
+| ------ | ------------------ | ------------------------------------ |
+| GET    | /question-stats/   | Listar estadísticas por pregunta     |
+| POST   | /question-stats/   | Crear estadística inicial            |
+
 
 Notas Adicionales
 
