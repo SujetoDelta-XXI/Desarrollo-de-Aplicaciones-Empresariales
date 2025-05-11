@@ -56,10 +56,6 @@ Endpoints Principales
 
 /api/quizzes/<id>/validate/ — Validar respuestas de un quiz
 
-/api/profiles/ — CRUD de perfiles de usuario
-
-/api/attempts/ — CRUD de intentos de quiz
-
 Aplicaciones Adicionales
 1. User Management System (Perfiles de Usuario)
 
