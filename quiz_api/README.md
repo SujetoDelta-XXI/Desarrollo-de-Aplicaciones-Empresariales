@@ -88,8 +88,10 @@ score (puntaje obtenido)
 max_score (puntaje máximo)
 
 completed_at (fecha de intento)
+Endpoint general:
+/api/users/ 
 
-Endpoints:
+Endpoints separados:
 
 /api/users/profiles/ — Listar y crear perfiles
 
