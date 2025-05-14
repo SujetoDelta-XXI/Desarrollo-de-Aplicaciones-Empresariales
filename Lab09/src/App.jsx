@@ -1,6 +1,11 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
+import Menu from './components/Menu'
 import SerieComponent from './components/SerieComponent'
+import Home from './pages/Home'
+import Series from './pages/Series'
+import Contacto from './pages/Contacto'
 
 function App() {
   const series = [
@@ -13,24 +18,17 @@ function App() {
   ];
 
   return (
-    <>
+    <Router>
       <Header />
+      <Menu />
       <div className="container mt-3">
-        <h1 className="border-bottom pb-3 mb-3">Series</h1>
-        <div className="row">
-          {series.map((serie) => (
-            <div key={serie.cod} className="col-md-4 mb-3">
-              <SerieComponent
-                codigo={serie.cod}
-                nombre={serie.nom}
-                genero={serie.cat}
-                imagen={serie.img}
-              />
-            </div>
-          ))}
-        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/series" element={<Series series={series} />} />
+          <Route path="/contacto" element={<Contacto />} />
+        </Routes>
       </div>
-    </>
+    </Router>
   );
 }
 
