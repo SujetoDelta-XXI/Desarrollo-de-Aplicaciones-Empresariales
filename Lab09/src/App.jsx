@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SerieComponent from './components/SerieComponent';
 import Header from './components/Header';
 import DescripcionComponent from './components/DescripcionComponent';
+import Footer from './components/Footer';
 
 function App() {
   const series = [
@@ -36,6 +37,7 @@ function App() {
         } />
         <Route path="/descripcion/:nombre/:genero" element={<DescripcionComponent />} />
       </Routes>
+      <Footer /> {/* El Footer va aquí, fuera de <Routes> */}
     </BrowserRouter>
   );
 }
