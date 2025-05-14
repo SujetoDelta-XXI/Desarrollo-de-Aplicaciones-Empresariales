@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SerieComponent from './components/SerieComponent';
 import Header from './components/Header';
 import DescripcionComponent from './components/DescripcionComponent';
+import Menu from './components/Menu';
 import Footer from './components/Footer';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
+      <Menu />
       <Routes>
         <Route path="/" element={
           <div className="container mt-3">
