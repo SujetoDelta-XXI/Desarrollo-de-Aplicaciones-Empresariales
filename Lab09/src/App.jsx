@@ -1,4 +1,5 @@
 import './App.css'
+import Header from './components/Header'
 import SerieComponent from './components/SerieComponent'
 
 function App() {
@@ -10,22 +11,26 @@ function App() {
     {cod:5, nom:"Dr. House", cat:"Drama", img:"dr-house.png"},
     {cod:6, nom:"The X-Files", cat:"Drama", img:"the-x-files.png"}
   ];
+
   return (
-    <div classNameName="container mt-3">
-      <h1 classNameName="border-bottom pb-3 mb-3">Series</h1>
-      <div classNameName="row">
-        {series.map((serie) => (
-          <div key={serie.codigo} classNameName="col-md-4 mb-3">
-            <SerieComponent
-              codigo={serie.cod}
-              nombre={serie.nom}
-              genero={serie.cat}
-              imagen={serie.img}
-            />
-          </div>
-        ))}
+    <>
+      <Header />
+      <div className="container mt-3">
+        <h1 className="border-bottom pb-3 mb-3">Series</h1>
+        <div className="row">
+          {series.map((serie) => (
+            <div key={serie.cod} className="col-md-4 mb-3">
+              <SerieComponent
+                codigo={serie.cod}
+                nombre={serie.nom}
+                genero={serie.cat}
+                imagen={serie.img}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
