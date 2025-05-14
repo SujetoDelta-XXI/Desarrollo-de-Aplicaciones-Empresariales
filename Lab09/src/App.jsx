@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SerieComponent from './components/SerieComponent';
-import Header from './components/Header'
-import DescripcionComponent from './components/DescripcionComponent'
+import Header from './components/Header';
+import DescripcionComponent from './components/DescripcionComponent';
 
 function App() {
   const series = [
