@@ -28,16 +28,12 @@ function App() {
       <div className="container mt-3">
         <Routes>
 
-          {/* Tu ruta de inicio */}
           <Route path="/" element={<Home />} />
 
-          {/* Ruta combinada con tu componente Series */}
           <Route path="/series" element={<Series series={series} />} />
 
-          {/* Ruta del componente Contacto */}
           <Route path="/contacto" element={<Contacto />} />
 
-          {/* Ruta que lista las series en esta misma vista */}
           <Route path="/listado" element={
             <div>
               <h1 className="border-bottom pb-3 mb-3">Series</h1>
@@ -56,7 +52,6 @@ function App() {
             </div>
           } />
 
-          {/* Ruta para mostrar descripción de una serie */}
           <Route path="/descripcion/:nombre/:genero" element={<DescripcionComponent />} />
         </Routes>
       </div>
