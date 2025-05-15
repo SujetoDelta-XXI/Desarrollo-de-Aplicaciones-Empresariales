@@ -1,9 +1,15 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SerieComponent from './components/SerieComponent';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
+
 import Header from './components/Header';
-import DescripcionComponent from './components/DescripcionComponent';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
+import SerieComponent from './components/SerieComponent';
+import DescripcionComponent from './components/DescripcionComponent';
+
+import Home from './pages/Home';
+import Series from './pages/Series';
+import Contacto from './pages/Contacto';
 
 function App() {
   const series = [
@@ -16,31 +22,46 @@ function App() {
   ];
 
   return (
-    <BrowserRouter>
+    <Router>
       <Header />
       <Menu />
-      <Routes>
-        <Route path="/" element={
-          <div className="container mt-3">
-            <h1 className="border-bottom pb-3 mb-3">Series</h1>
-            <div className="row">
-              {series.map((serie) => (
-                <div key={serie.cod} className="col-md-4 mb-3">
-                  <SerieComponent
-                    codigo={serie.cod}
-                    nombre={serie.nom}
-                    genero={serie.cat}
-                    imagen={serie.img}
-                  />
-                </div>
-              ))}
+      <div className="container mt-3">
+        <Routes>
+
+          {/* Tu ruta de inicio */}
+          <Route path="/" element={<Home />} />
+
+          {/* Ruta combinada con tu componente Series */}
+          <Route path="/series" element={<Series series={series} />} />
+
+          {/* Ruta del componente Contacto */}
+          <Route path="/contacto" element={<Contacto />} />
+
+          {/* Ruta que lista las series en esta misma vista */}
+          <Route path="/listado" element={
+            <div>
+              <h1 className="border-bottom pb-3 mb-3">Series</h1>
+              <div className="row">
+                {series.map((serie) => (
+                  <div key={serie.cod} className="col-md-4 mb-3">
+                    <SerieComponent
+                      codigo={serie.cod}
+                      nombre={serie.nom}
+                      genero={serie.cat}
+                      imagen={serie.img}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        } />
-        <Route path="/descripcion/:nombre/:genero" element={<DescripcionComponent />} />
-      </Routes>
-      <Footer /> {/* El Footer va aquí, fuera de <Routes> */}
-    </BrowserRouter>
+          } />
+
+          {/* Ruta para mostrar descripción de una serie */}
+          <Route path="/descripcion/:nombre/:genero" element={<DescripcionComponent />} />
+        </Routes>
+      </div>
+      <Footer />
+    </Router>
   );
 }
 
