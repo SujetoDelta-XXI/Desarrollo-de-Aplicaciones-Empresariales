@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomPage';
 import CategoryPage from './pages/CategoryPage';
+import CategoryFormPage from './pages/CategoryFormPage'; // nuevo
 import SeriePage from './pages/SeriePage';
 import SerieFormPage from './pages/SerieFormPage';
 
@@ -16,12 +17,21 @@ function App() {
     { cod: 6, nom: "The X-Files", cat: "Drama", img: "the-x-files.png" },
   ]);
 
+  // Estado para categorías
+  const [categories, setCategories] = useState([
+    { cod: 1, nom: "Horror" },
+    { cod: 2, nom: "Comedy" },
+    { cod: 3, nom: "Action" },
+    { cod: 4, nom: "Drama" },
+  ]);
+
   return (
     <Router>
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/home" element={<HomePage />} />
-        <Route path="/categories" element={<CategoryPage />} />
+        <Route path="/categories" element={<CategoryPage categories={categories} setCategories={setCategories} />} />
+        <Route path="/categories/edit/:idcategory" element={<CategoryFormPage categories={categories} setCategories={setCategories} />} />
         <Route path="/series" element={<SeriePage series={series} setSeries={setSeries} />} />
         <Route path="/series/edit/:idserie" element={<SerieFormPage series={series} setSeries={setSeries} />} />
       </Routes>
