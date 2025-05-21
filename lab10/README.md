@@ -1,12 +1,38 @@
-# React + Vite
+# SeriesApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
 
-Currently, two official plugins are available:
+SeriesApp es una aplicación web desarrollada con React que permite gestionar una lista de series de televisión. Incluye funcionalidades para visualizar series, editar detalles y navegar entre diferentes secciones como Inicio, Categorías y Series.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Características
 
-## Expanding the ESLint configuration
+- Navegación dinámica usando React Router.
+- Visualización de series con imágenes almacenadas localmente.
+- Formulario para editar detalles de una serie, incluyendo nombre, categoría e imagen.
+- Uso de componentes reutilizables para mantener una estructura limpia y modular.
+- Diseño responsivo basado en Bootstrap.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Estructura del proyecto
+
+- `src/components/`: Contiene los componentes reutilizables como `HeaderComponent` y `SerieComponent`.
+- `src/assets/`: Carpeta donde se almacenan las imágenes de las series.
+- `src/pages/`: Contiene las páginas principales como `SeriePage` y `SerieFormPage`.
+- `src/App.js`: Configuración principal de rutas y estructura de la aplicación.
+
+## Login:
+
+Puedes loguearte con cualquier credencial, debido a que no esta registrada.
+
+### Despliegue:
+
+https://lab10-iota.vercel.app/
+
+Tener una cuenta en Vercel - Loguearse con GitHub
+
+Crear la carpeta dist:
+npm run builder
+
+usar el comando Vercel
+
+Completar los apartados que te indica con Y/N
+
