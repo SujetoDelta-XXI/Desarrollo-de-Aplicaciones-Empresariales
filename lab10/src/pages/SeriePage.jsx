@@ -1,44 +1,59 @@
-import HeaderComponent from "../components/HeaderComponent"
-import SerieComponent from "../components/SerieComponent"
+import HeaderComponent from "../components/HeaderComponent";
+import SerieComponent from "../components/SerieComponent";
+import { useNavigate } from "react-router-dom";
 
+function SeriePage({ series, setSeries }) {
+  const navigate = useNavigate();
 
-function SeriePage(){
-    const series = [
-        {cod:1, nom:"Friends", cat:"Comedy", img:"friends.png"},
-        {cod:2, nom:"Law & Order", cat:"Drama", img:"law-and-order.png"},
-        {cod:3, nom:"The Big Bang Theory", cat:"Comedy", img:"the-big-bang-theory.png"},
-        {cod:4, nom:"Stranger Things", cat:"Horror", img:"stranger-things.png"},
-        {cod:5, nom:"Dr. House", cat:"Drama", img:"dr-house.png"},
-        {cod:6, nom:"The X-Files", cat:"Drama", img:"the-x-files.png"},
-      ];
+  const handleDelete = (cod) => {
+    if (window.confirm("¿Está seguro de eliminar esta serie?")) {
+      setSeries(series.filter((serie) => serie.cod !== cod));
+      // También eliminar imagen de LocalStorage
+      localStorage.removeItem(`serie-img-${cod}`);
+    }
+  };
+  
+  const handleEdit = (cod) => {
+    navigate(`/series/edit/${cod}`);
+  };
 
+  const handleNew = () => {
+    navigate("/series/edit/new");
+  };
 
-      return (
-        <>
-            <HeaderComponent />
-            <div className="container mt-3">
-                <div className="d-flex justify-content-between border-bottom pb-3 mb-3">
-                    <h3>Series</h3>
-                    <div>
-                        <a className="btn btn-primary" href="#">Nuevo</a>
-                    </div>
-                </div>
-                <div className="row">
-                    {series.map((serie)=>(
-                    <div key={serie.cod} className="col-md-3 mb-3">
-                        <SerieComponent
-                        	codigo={serie.cod}
-                        	nombre={serie.nom}
-                        	categoria={serie.cat}
-                        	imagen={serie.img}
-                        />
-                    </div>
-                    ))}
-                </div>
-            </div>
-        </>
-      )
+  return (
+    <>
+      <HeaderComponent />
+      <div className="container mt-3">
+        <div className="d-flex justify-content-between border-bottom pb-3 mb-3">
+          <h3>Series</h3>
+          <div>
+            <button className="btn btn-primary" onClick={handleNew}>
+              Nuevo
+            </button>
+          </div>
+        </div>
+        <div className="row">
+          {series.map((serie) => {
+            // Leer imagen Base64 de LocalStorage
+            const imgBase64 = localStorage.getItem(`serie-img-${serie.cod}`);
+            return (
+              <div key={serie.cod} className="col-md-3 mb-3">
+                <SerieComponent
+                  codigo={serie.cod}
+                  nombre={serie.nom}
+                  categoria={serie.cat}
+                  imagen={imgBase64 || "https://dummyimage.com/400x250/000/fff&text=No+Image"}
+                  onDelete={handleDelete}
+                  onEdit={handleEdit}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </>
+  );
 }
 
-
-export default SeriePage
+export default SeriePage;
