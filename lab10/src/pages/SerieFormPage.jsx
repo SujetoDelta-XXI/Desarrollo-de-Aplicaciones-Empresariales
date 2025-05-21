@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import HeaderComponent from "../components/HeaderComponent";
 
-function SerieFormPage({ series, setSeries }) {
+function SerieFormPage({ series, setSeries, categories }) {  // Recibe categories
   const { idserie } = useParams();
   const navigate = useNavigate();
 
@@ -11,32 +11,28 @@ function SerieFormPage({ series, setSeries }) {
   const [formData, setFormData] = useState({
     nom: '',
     cat: '',
-    img: '', // Aquí guardaremos la imagen en Base64
+    img: '',
   });
 
-  // Cargar datos al iniciar, incluyendo imagen desde LocalStorage si existe
   useEffect(() => {
     if (!isNew) {
       const serie = series.find(s => s.cod === parseInt(idserie));
       if (serie) {
-        // Intentar cargar imagen Base64 desde LocalStorage usando clave con cod
         const savedImg = localStorage.getItem(`serie-img-${serie.cod}`);
         setFormData({
           nom: serie.nom,
           cat: serie.cat,
-          img: savedImg || '', // si no hay imagen guardada, vacío
+          img: savedImg || '',
         });
       }
     }
   }, [idserie, isNew, series]);
 
-  // Manejar cambios en inputs de texto y select
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData(prev => ({ ...prev, [id]: value }));
   };
 
-  // Manejar subida de archivo y convertir a Base64
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -44,14 +40,13 @@ function SerieFormPage({ series, setSeries }) {
       reader.onloadend = () => {
         setFormData(prev => ({
           ...prev,
-          img: reader.result, // Guardamos Base64 en estado
+          img: reader.result,
         }));
       };
       reader.readAsDataURL(file);
     }
   };
 
-  // Guardar datos y la imagen en LocalStorage
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -61,17 +56,15 @@ function SerieFormPage({ series, setSeries }) {
         cod: newCod,
         nom: formData.nom,
         cat: formData.cat,
-        img: '', // No guardamos nombre, imagen está en LocalStorage
+        img: '',
       };
       setSeries([...series, newSerie]);
-      // Guardar imagen Base64 en LocalStorage con clave nueva
       localStorage.setItem(`serie-img-${newCod}`, formData.img);
     } else {
       const updatedSeries = series.map(s =>
         s.cod === parseInt(idserie) ? { ...s, nom: formData.nom, cat: formData.cat } : s
       );
       setSeries(updatedSeries);
-      // Actualizar imagen Base64 en LocalStorage
       localStorage.setItem(`serie-img-${idserie}`, formData.img);
     }
 
@@ -120,10 +113,11 @@ function SerieFormPage({ series, setSeries }) {
                 required
               >
                 <option value="">Seleccione una opción</option>
-                <option value="Horror">Horror</option>
-                <option value="Comedy">Comedy</option>
-                <option value="Action">Action</option>
-                <option value="Drama">Drama</option>
+                {categories.map(cat => (
+                  <option key={cat.cod} value={cat.nom}>
+                    {cat.nom}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="mb-3">
