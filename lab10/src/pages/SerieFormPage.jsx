@@ -1,10 +1,8 @@
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import HeaderComponent from "../components/HeaderComponent"
 
-
-function SerieFormPage(){
-
+function SerieFormPage() {
     const series = [
         { cod: 1, nom: "Friends", cat: "Comedia", img: "friends.png" },
         { cod: 2, nom: "Ley y Orden", cat: "Drama", img: "law-and-order.png" },
@@ -15,37 +13,45 @@ function SerieFormPage(){
     ];
 
     const { idserie } = useParams();
+    const navigate = useNavigate();
 
     const setDataForm = (codigo) => {
         for (const item of series) {
-            if (item.cod == codigo) {
+            if (item.cod === codigo) {
                 console.log(item);
                 document.getElementById('inputName').value = item.nom;
                 document.getElementById('inputCategory').value = item.cat;
-                document.getElementById('fileImg').src ="https://dummyimage.com/400x250/000/fff&text=" + item.img;
+                document.getElementById('fileImg').src = "https://dummyimage.com/400x250/000/fff&text=" + item.img;
                 break;
             }
         }
     };
 
     useEffect(() => {
-        setDataForm(parseInt(idserie));
-    }, []);
+        if (idserie) {
+            setDataForm(parseInt(idserie));
+        }
+    }, [idserie]);
+
+    const handleCancel = () => {
+        navigate('/series'); // Regresa al listado de series
+    };
 
     return (
         <>
             <HeaderComponent />
             <div className="container mt-3">
                 <div className="border-bottom pb-3 mb-3">
-                    <h3>Nuevo - Serie</h3>
+                    <h3>{idserie ? "Editar - Serie" : "Nuevo - Serie"}</h3>
                 </div>
                 <form className="row">
                     <div className="col-md-4">
-                        <img 
+                        <img
                             id="fileImg"
-                            className="card-img-top" 
-                            src={"https://dummyimage.com/400x250/000/fff"} 
-                            alt="img" />
+                            className="card-img-top"
+                            src={"https://dummyimage.com/400x250/000/fff"}
+                            alt="img"
+                        />
                     </div>
                     <div className="col-md-8">
                         <div className="mb-3">
@@ -66,8 +72,9 @@ function SerieFormPage(){
                             <label htmlFor="inputImage" className="form-label">Imagen</label>
                             <input type="file" className="form-control" id="inputImage" required />
                         </div>
-                        <div className="mb-3">
-                            <button className="btn btn-primary">Guardar</button>
+                        <div className="mb-3 d-flex">
+                            <button type="submit" className="btn btn-primary me-2">Guardar</button>
+                            <button type="button" className="btn btn-secondary" onClick={handleCancel}>Cancelar</button>
                         </div>
                     </div>
                 </form>
@@ -76,5 +83,4 @@ function SerieFormPage(){
     )
 }
 
-
-export default SerieFormPage
+export default SerieFormPage;
