@@ -2,17 +2,20 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import HeaderComponent from "../components/HeaderComponent";
 
+const initData = {
+  cod: '',
+  nom: '',
+  cat: '',
+}
+
 function SerieFormPage({ series, setSeries, categories }) {  // Recibe categories
   const { idserie } = useParams();
+  const [formData, setFormData] = useState(initData);
+  
   const navigate = useNavigate();
 
   const isNew = idserie === "new";
 
-  const [formData, setFormData] = useState({
-    nom: '',
-    cat: '',
-    img: '',
-  });
 
   useEffect(() => {
     if (!isNew) {
@@ -28,9 +31,15 @@ function SerieFormPage({ series, setSeries, categories }) {  // Recibe categorie
     }
   }, [idserie, isNew, series]);
 
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData(prev => ({ ...prev, [id]: value }));
+
+  const onChangeNombre = (e) => {
+    const nData = { ...formData, nom: e.target.value };
+    setFormData(nData);
+  }
+
+  const onChangeCategoria = (e) => {
+    const nData = { ...formData, cat: e.target.value };
+    setFormData(nData);
   };
 
   const handleFileChange = (e) => {
@@ -99,7 +108,7 @@ function SerieFormPage({ series, setSeries, categories }) {  // Recibe categorie
                 className="form-control"
                 id="nom"
                 value={formData.nom}
-                onChange={handleChange}
+                onChange={onChangeNombre}
                 required
               />
             </div>
@@ -109,7 +118,7 @@ function SerieFormPage({ series, setSeries, categories }) {  // Recibe categorie
                 className="form-select"
                 id="cat"
                 value={formData.cat}
-                onChange={handleChange}
+                onChange={onChangeCategoria}
                 required
               >
                 <option value="">Seleccione una opción</option>
