@@ -11,7 +11,7 @@ function SerieComponent({ codigo, nombre, categoria, imagen, onDelete }) {
     <div className="card">
       <img
         className="card-img-top"
-        src={imagen}  // Usamos directamente la imagen Base64 o URL
+        src={imagen}
         alt="img"
       />
       <div className="card-body">
