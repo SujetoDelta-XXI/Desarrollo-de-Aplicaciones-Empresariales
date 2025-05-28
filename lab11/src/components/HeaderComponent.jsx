@@ -21,11 +21,7 @@ function HeaderComponent() {
                         </li>
                     </ul>
                     <div>
-<<<<<<< HEAD
                         CHANCHIRATA 
-=======
-                        Bienvenido admin@tecsup.edu.pe
->>>>>>> f61c885ee3f9cb36848e059f6cbe24f2430c4d43
                         <div className="text-end">
                             <a href="/">Salir</a>
                         </div> 
