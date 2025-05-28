@@ -21,7 +21,7 @@ function HeaderComponent() {
                         </li>
                     </ul>
                     <div>
-                        Bienvenido admin@tecsup.edu.pe
+                        CHANCHIRATA 
                         <div className="text-end">
                             <a href="/">Salir</a>
                         </div> 
