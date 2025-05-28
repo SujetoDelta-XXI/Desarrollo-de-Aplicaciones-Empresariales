@@ -1,8 +1,6 @@
 import { NavLink } from "react-router-dom";
 
 function HeaderComponent() {
-
-
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
@@ -23,7 +21,7 @@ function HeaderComponent() {
                         </li>
                     </ul>
                     <div>
-                        Bienvenido Jhon Due 
+                        Bienvenido admin@tecsup.edu.pe
                         <div className="text-end">
                             <a href="/">Salir</a>
                         </div> 
