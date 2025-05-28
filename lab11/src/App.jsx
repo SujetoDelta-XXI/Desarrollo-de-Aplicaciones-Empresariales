@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomPage";
@@ -8,18 +7,12 @@ import CategoryFormPage from "./pages/CategoryFormPage";
 import SeriePage from "./pages/SeriePage";
 import SerieFormPage from "./pages/SerieFormPage";
 import PrivateRoute from "./components/PrivateRoute";
-=======
-import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import HomePage from './pages/HomPage';
-import CategoryPage from './pages/CategoryPage';
-import CategoryFormPage from './pages/CategoryFormPage';
-import SeriePage from './pages/SeriePage';
-import SerieFormPage from './pages/SerieFormPage';
->>>>>>> 72d98425c3da0eedfb66d075aee72a0a3e032e0d
+
 
 function App() {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   // 1. Leer series desde localStorage o usar valores iniciales
   const storedSeries = JSON.parse(localStorage.getItem("series")) || [
     { cod: 1, nom: "Friends", cat: "Comedy", img: "friends.png" },
@@ -61,10 +54,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem("categories", JSON.stringify(categories));
   }, [categories]);
-
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  <PrivateRoute/>;
 
   return (
     <Router>
