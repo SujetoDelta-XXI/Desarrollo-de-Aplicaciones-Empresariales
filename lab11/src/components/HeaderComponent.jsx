@@ -23,7 +23,7 @@ function HeaderComponent() {
                         </li>
                     </ul>
                     <div>
-                        Bienvenido Jhon Due 
+                        CHANCHIRATA 
                         <div className="text-end">
                             <a href="/">Salir</a>
                         </div> 
