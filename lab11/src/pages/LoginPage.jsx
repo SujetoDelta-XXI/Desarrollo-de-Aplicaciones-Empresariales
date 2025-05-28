@@ -76,7 +76,7 @@ function LoginPage({ setIsAuthenticated }) {
               </div>
             </div>
             <div className="text-center mt-5 text-muted">
-              Copyright &copy; Tecsup 2024
+              Copyright &copy; Tecsup 2025
             </div>
           </div>
         </div>
