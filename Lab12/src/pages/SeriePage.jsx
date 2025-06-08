@@ -1,52 +1,32 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
 import HeaderComponent from "../components/HeaderComponent";
 import SerieComponent from "../components/SerieComponent";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
+import { API_BASE_URL } from "../config";
 
 function SeriePage({ series, setSeries }) {
-  const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
+  const urlApi = `${API_BASE_URL}series/`;
 
-  // Cargar series
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const resp = await axios.get("http://localhost:8000/api/series/");
-        setSeries(resp.data);
-      } catch (error) {
-        console.error("Error cargando series:", error);
-      }
-    };
-    loadData();
-  }, [setSeries]);
-
-  // Cargar categorías
-  useEffect(() => {
-    axios.get("http://localhost:8000/api/categorias/")
-      .then(resp => setCategories(resp.data));
-  }, []);
-
-  // Función para obtener el nombre de la categoría
-  const getCategoriaNombre = (catId) => {
-    const cat = categories.find(c => c.id === catId);
-    return cat ? cat.nombre : "";
-  };
-
-  const handleDelete = async (id) => {
+  const handleDelete = async (cod) => {
     if (window.confirm("¿Está seguro de eliminar esta serie?")) {
-      await axios.delete(`http://localhost:8000/api/series/${id}/`);
-      setSeries(series.filter((serie) => serie.id !== id));
+      await axios.delete(`${urlApi}${cod}/`);
+      setSeries(series.filter((serie) => serie.id !== cod));
     }
   };
 
-  const handleEdit = (id) => {
-    navigate(`/series/edit/${id}`);
+  const handleEdit = (cod) => {
+    navigate(`/series/edit/${cod}`);
   };
 
   const handleNew = () => {
     navigate("/series/edit/new");
   };
+
+  useEffect(() => {
+    axios.get(urlApi).then((resp) => setSeries(resp.data));
+  }, []);
 
   return (
     <>
@@ -66,7 +46,7 @@ function SeriePage({ series, setSeries }) {
               <SerieComponent
                 codigo={serie.id}
                 nombre={serie.nombre}
-                categoria={getCategoriaNombre(serie.categoria)}
+                categoria={serie.categoria}
                 imagen={serie.imagen_url || "https://dummyimage.com/400x250/000/fff&text=No+Image"}
                 onDelete={handleDelete}
                 onEdit={handleEdit}

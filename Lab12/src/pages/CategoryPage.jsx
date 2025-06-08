@@ -2,15 +2,16 @@ import { useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import HeaderComponent from "../components/HeaderComponent";
+import { API_BASE_URL } from "../config";
 
 function CategoryPage({ categories, setCategories }) {
   const navigate = useNavigate();
-  const urlApi = "http://127.0.0.1:8000/api/categorias/";
+  const urlApi = `${API_BASE_URL}categorias/`;
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        const resp = await axios.get("http://127.0.0.1:8000/api/categorias/");
+        const resp = await axios.get(urlApi);
         console.log("Categorías cargadas:", resp.data);
         setCategories(resp.data);
       } catch (error) {
@@ -23,9 +24,13 @@ function CategoryPage({ categories, setCategories }) {
 
   const handleDelete = async (id) => {
     if (window.confirm("¿Está seguro de eliminar este registro?")) {
-      await axios.delete(`${urlApi}${id}/`);
-      const nLista = categories.filter((item) => item.id !== id);
-      setCategories(nLista);
+      try {
+        await axios.delete(`${urlApi}${id}/`);
+        const nLista = categories.filter((item) => item.id !== id);
+        setCategories(nLista);
+      } catch (error) {
+        console.error("Error al eliminar:", error);
+      }
     }
   };
 
@@ -63,21 +68,21 @@ function CategoryPage({ categories, setCategories }) {
                 <td className="text-center">
                   <div className="btn-actions">
                     <button
-                    onClick={() => handleEdit(item.id)}
-                    className="btn-cuadro btn-editar"
-                    title="Editar"
+                      onClick={() => handleEdit(item.id)}
+                      className="btn-cuadro btn-editar"
+                      title="Editar"
                     >
                       <i className="bi bi-pencil-square"></i>
-                      </button>
-                      <button
+                    </button>
+                    <button
                       onClick={() => handleDelete(item.id)}
                       className="btn-cuadro btn-eliminar"
                       title="Eliminar"
-                      >
-                        <i className="bi bi-trash-fill"></i>
-                        </button>
-                        </div>
-                        </td>
+                    >
+                      <i className="bi bi-trash-fill"></i>
+                    </button>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>

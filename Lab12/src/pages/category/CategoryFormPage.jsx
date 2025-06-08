@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import HeaderComponent from "../../components/HeaderComponent";
+import { API_BASE_URL } from "../../config";
 
 const initData = {
   id: '',
@@ -9,7 +10,7 @@ const initData = {
 }
 
 function CategoryFormPage() {
-  const urlApi = 'http://localhost:8000/api/categorias/';
+  const urlApi = `${API_BASE_URL}categorias/`;
   const navigate = useNavigate();
   const [data, setData] = useState(initData);
 
@@ -19,8 +20,12 @@ function CategoryFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post(urlApi, data);
-    navigate("/categories");
+    try {
+      await axios.post(urlApi, data);
+      navigate("/categories");
+    } catch (error) {
+      console.error("Error al guardar categoría:", error);
+    }
   };
 
   return (

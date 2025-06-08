@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import HeaderComponent from "../components/HeaderComponent";
+import { API_BASE_URL } from "../config";
 
 const initData = {
   nombre: '',
@@ -16,17 +17,22 @@ function SerieFormPage() {
   const isNew = idserie === "new";
   const [formData, setFormData] = useState(initData);
   const [categories, setCategories] = useState([]);
-  const urlApi = 'http://localhost:8000/api/series/';
-  const urlCat = 'http://localhost:8000/api/categorias/';
 
-  // Cargar categorías SIEMPRE desde la API
+  const urlApi = `${API_BASE_URL}series/`;
+  const urlCat = `${API_BASE_URL}categorias/`;
+
+  // Cargar categorías
   useEffect(() => {
-    axios.get(urlCat).then(resp => setCategories(resp.data));
+    axios.get(urlCat)
+      .then(resp => setCategories(resp.data))
+      .catch(err => console.error("Error al cargar categorías:", err));
   }, []);
 
   useEffect(() => {
     if (!isNew) {
-      axios.get(`${urlApi}${idserie}/`).then(resp => setFormData(resp.data));
+      axios.get(`${urlApi}${idserie}/`)
+        .then(resp => setFormData(resp.data))
+        .catch(err => console.error("Error al cargar serie:", err));
     }
   }, [idserie, isNew]);
 
@@ -37,12 +43,16 @@ function SerieFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isNew) {
-      await axios.post(urlApi, formData);
-    } else {
-      await axios.put(`${urlApi}${idserie}/`, formData);
+    try {
+      if (isNew) {
+        await axios.post(urlApi, formData);
+      } else {
+        await axios.put(`${urlApi}${idserie}/`, formData);
+      }
+      navigate("/series");
+    } catch (error) {
+      console.error("Error al guardar serie:", error);
     }
-    navigate("/series");
   };
 
   return (
@@ -105,7 +115,7 @@ function SerieFormPage() {
           <div className="d-grid gap-3">
             <button className="btn btn-warning" type="submit">Guardar</button>
             <button className="btn btn-secondary" type="button" onClick={() => navigate("/series")}>Cancelar</button>
-            </div>
+          </div>
         </form>
       </div>
     </>
