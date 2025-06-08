@@ -1,6 +1,176 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+/* Reset y base */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+.navbar {
+  background-color: #001f3f !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  padding: 0.8rem 1rem;
+}
+
+.navbar .navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #f7b733 !important;
+}
+
+.navbar .nav-link {
+  color: #ffffff !important;
+  margin-right: 1rem;
+  transition: all 0.3s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: #f7b733 !important;
+}
+
+/* Botones */
+
+.btn-primary {
+  background-color: #f7b733;
+  border: none;
+  color: #001f3f;
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background-color: #ffcc00;
+  color: #000;
+}
+
+.btn-secondary {
+  background-color: #445a6f;
+  border: none;
+}
+
+.btn-danger {
+  background-color: #c0392b;
+  border: none;
+}
+
+/* Tarjetas de series */
+.card {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+  border: none;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.card-text {
+  font-size: 0.9rem;
+  color: #666;
+}
+
 .card-img-top {
   width: 100%;
   height: 250px;
-  object-fit: contain; /* Cambia cover por contain */
-  background: #f8f9fa; /* Opcional: color de fondo para los bordes vacíos */
+  object-fit: cover;
+  background: #e0e0e0;
+}
+
+/* Tabla de categorías */
+.table {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.table th {
+  background-color: #001f3f;
+  color: white;
+}
+
+/* Formularios */
+form .form-label {
+  font-weight: 600;
+  color: #001f3f;
+}
+
+/* Login */
+.card.shadow-lg {
+  border-radius: 16px;
+  background: linear-gradient(to bottom right, #ffffff, #f2f2f2);
+  border: 1px solid #dee2e6;
+}
+
+.card-title {
+  color: #001f3f;
+}
+
+/* Footer */
+footer {
+  background-color: #001f3f;
+  color: #fff;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.btn-cuadro {
+  width: 40px;
+  height: 40px;
+  border-radius: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-cuadro i {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.btn-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+
+.btn-editar {
+  background-color: #495057;
+  color: white;
+}
+.btn-eliminar {
+  background-color: #dc3545;
+  color: white;
+}
+.btn-cuadro:hover {
+  filter: brightness(1.1);
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+
+
+/* Responsive tweaks */
+@media (max-width: 576px) {
+  .card-img-top {
+    height: 200px;
+  }
+  .navbar .navbar-brand {
+    font-size: 1.2rem;
+  }
 }

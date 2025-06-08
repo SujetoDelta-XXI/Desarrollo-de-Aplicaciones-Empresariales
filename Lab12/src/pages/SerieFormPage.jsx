@@ -102,8 +102,10 @@ function SerieFormPage() {
               ))}
             </select>
           </div>
-          <button className="btn btn-primary me-2">Guardar</button>
-          <button className="btn btn-secondary" onClick={() => navigate("/series")}>Cancelar</button>
+          <div className="d-grid gap-3">
+            <button className="btn btn-warning" type="submit">Guardar</button>
+            <button className="btn btn-secondary" type="button" onClick={() => navigate("/series")}>Cancelar</button>
+            </div>
         </form>
       </div>
     </>

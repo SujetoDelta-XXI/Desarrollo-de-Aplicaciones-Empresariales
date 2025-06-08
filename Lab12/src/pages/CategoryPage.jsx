@@ -61,19 +61,23 @@ function CategoryPage({ categories, setCategories }) {
                 <td>{item.nombre}</td>
                 <td className="text-center">{item.id}</td>
                 <td className="text-center">
-                  <button
+                  <div className="btn-actions">
+                    <button
                     onClick={() => handleEdit(item.id)}
-                    className="btn btn-secondary me-2 btn-sm"
-                  >
-                    <i className="bi bi-pencil-square"></i>
-                  </button>
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    className="btn btn-danger btn-sm"
-                  >
-                    <i className="bi bi-trash-fill"></i>
-                  </button>
-                </td>
+                    className="btn-cuadro btn-editar"
+                    title="Editar"
+                    >
+                      <i className="bi bi-pencil-square"></i>
+                      </button>
+                      <button
+                      onClick={() => handleDelete(item.id)}
+                      className="btn-cuadro btn-eliminar"
+                      title="Eliminar"
+                      >
+                        <i className="bi bi-trash-fill"></i>
+                        </button>
+                        </div>
+                        </td>
               </tr>
             ))}
           </tbody>
