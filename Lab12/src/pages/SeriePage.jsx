@@ -1,20 +1,47 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import HeaderComponent from "../components/HeaderComponent";
 import SerieComponent from "../components/SerieComponent";
 import { useNavigate } from "react-router-dom";
 
 function SeriePage({ series, setSeries }) {
+  const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
-  const handleDelete = (cod) => {
+  // Cargar series
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const resp = await axios.get("http://localhost:8000/api/series/");
+        setSeries(resp.data);
+      } catch (error) {
+        console.error("Error cargando series:", error);
+      }
+    };
+    loadData();
+  }, [setSeries]);
+
+  // Cargar categorías
+  useEffect(() => {
+    axios.get("http://localhost:8000/api/categorias/")
+      .then(resp => setCategories(resp.data));
+  }, []);
+
+  // Función para obtener el nombre de la categoría
+  const getCategoriaNombre = (catId) => {
+    const cat = categories.find(c => c.id === catId);
+    return cat ? cat.nombre : "";
+  };
+
+  const handleDelete = async (id) => {
     if (window.confirm("¿Está seguro de eliminar esta serie?")) {
-      setSeries(series.filter((serie) => serie.cod !== cod));
-      // También eliminar imagen de LocalStorage
-      localStorage.removeItem(`serie-img-${cod}`);
+      await axios.delete(`http://localhost:8000/api/series/${id}/`);
+      setSeries(series.filter((serie) => serie.id !== id));
     }
   };
-  
-  const handleEdit = (cod) => {
-    navigate(`/series/edit/${cod}`);
+
+  const handleEdit = (id) => {
+    navigate(`/series/edit/${id}`);
   };
 
   const handleNew = () => {
@@ -34,22 +61,18 @@ function SeriePage({ series, setSeries }) {
           </div>
         </div>
         <div className="row">
-          {series.map((serie) => {
-            // Leer imagen Base64 de LocalStorage
-            const imgBase64 = localStorage.getItem(`serie-img-${serie.cod}`);
-            return (
-              <div key={serie.cod} className="col-md-3 mb-3">
-                <SerieComponent
-                  codigo={serie.cod}
-                  nombre={serie.nom}
-                  categoria={serie.cat}
-                  imagen={imgBase64 || "https://dummyimage.com/400x250/000/fff&text=No+Image"}
-                  onDelete={handleDelete}
-                  onEdit={handleEdit}
-                />
-              </div>
-            );
-          })}
+          {series.map((serie) => (
+            <div key={serie.id} className="col-md-3 mb-3">
+              <SerieComponent
+                codigo={serie.id}
+                nombre={serie.nombre}
+                categoria={getCategoriaNombre(serie.categoria)}
+                imagen={serie.imagen_url || "https://dummyimage.com/400x250/000/fff&text=No+Image"}
+                onDelete={handleDelete}
+                onEdit={handleEdit}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </>

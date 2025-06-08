@@ -10,12 +10,19 @@ const initData = {
   categoria: '',
 };
 
-function SerieFormPage({ categories }) {
+function SerieFormPage() {
   const { idserie } = useParams();
   const navigate = useNavigate();
   const isNew = idserie === "new";
   const [formData, setFormData] = useState(initData);
+  const [categories, setCategories] = useState([]);
   const urlApi = 'http://localhost:8000/api/series/';
+  const urlCat = 'http://localhost:8000/api/categorias/';
+
+  // Cargar categorías SIEMPRE desde la API
+  useEffect(() => {
+    axios.get(urlCat).then(resp => setCategories(resp.data));
+  }, []);
 
   useEffect(() => {
     if (!isNew) {
