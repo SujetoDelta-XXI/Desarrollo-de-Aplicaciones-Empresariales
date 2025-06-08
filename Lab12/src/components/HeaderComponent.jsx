@@ -20,7 +20,7 @@ function HeaderComponent() {
                             <NavLink className="nav-link" to="/series">Series</NavLink>
                         </li>
                     </ul>
-                    <div>
+                    <div style={{ color: "White"} }>
                         CHANCHIRATA 
                         <div className="text-end">
                             <a href="/">Salir</a>
