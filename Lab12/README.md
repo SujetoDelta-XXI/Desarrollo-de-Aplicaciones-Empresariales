@@ -38,20 +38,39 @@ Estas credenciales te permiten acceder al sistema como administrador para gestio
 cd cinepoli-API
 python manage.py runserver
 
-La API se expondrá en: [http://localhost:8000/api/](http://localhost:8000/api/)
 
 ### 2. Frontend (React + Vite)
+
+react
+react-dom
+react-router-dom
+vite (si es Vite)
+axios (para consumir APIs)
 
 cd seriesapp-frontend
 npm install
 npm run dev
 
+### 3. Despliegue (Render):
 
-El frontend estará disponible en: [http://localhost:5173/](http://localhost:5173/)
+## API:
+
+django - Framework backend principal
+djangorestframework	- Para crear APIs REST en Django
+django-cors-headers	- Para permitir solicitudes del frontend (CORS)
+psycopg2-binary	- Conector de Django con PostgreSQL
+dj-database-url	- Para leer DATABASE_URL desde Render
+gunicorn - Servidor WSGI para producción (usado en Render)
+whitenoise - Sirve archivos estáticos en producción (CSS, JS, etc.)
+
+------------------------
+La API se expondrá en: [https://cinepoli-api.onrender.com/api/]
+
+El frontend estará disponible en: [https://desarrollo-de-aplicaciones-empresariales.onrender.com]
 
 ---------------------------------------------------------------------------------------------------------------
 
-## 🌐 Rutas del Proyecto
+## 🌐 Rutas del Proyecto en local:
 
 - Frontend: http://localhost:5173/
 - API (Django): http://localhost:8000/api/
