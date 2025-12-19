@@ -1,0 +1,184 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-size: cover;
+    background-position: center;
+}
+
+header {
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #ffcc00;
+}
+
+/* Asegura que el video esté contenido dentro del div */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 800px; /* Ajusta la altura según tus necesidades */
+    overflow: hidden;
+}
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que el video cubra todo el div */
+    z-index: -1; /* Asegura que el video esté detrás del contenido */
+}
+
+.content {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto; /* Centra el bloque */
+    text-align: center; /* Centra el contenido dentro del div */
+    background-color: #f0f0f0;
+    border: 3px black solid;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 50%;
+    border-radius: 4px;
+    margin: 0 auto;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Asegurando que los campos del formulario estén centrados */
+.form-group {
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 80%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.container {
+    width: 35%;
+    margin: 20px auto;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 3px black solid;
+}
+
+.pokemon-details-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.pokemon-image img {
+    width: 250px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.pokemon-info {
+    font-size: 18px;
+    line-height: 1.8;
+    flex: 1;
+    margin-left: 20px;
+}
+
+.pokemon-info p {
+    margin: 10px 0;
+}
+
+.actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.button {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin: 5px;
+    font-weight: bold;
+}
+
+.lista {
+    background-color: skyblue;
+}
+
+
+.button:hover {
+    background-color: #45a049;
+}
+
+.lista:hover {
+    background-color: blue;
+}
+
+.delete {
+    background-color: #f44336;
+}
+
+.delete:hover {
+    background-color: #e53935;
+}
+
+a {
+    text-decoration: none;
+}

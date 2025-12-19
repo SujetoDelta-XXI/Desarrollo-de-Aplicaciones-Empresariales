@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>
+    {% if actividad_completada %}
+        Tareas Completadas
+    {% else %}
+        Tareas Incompletas
+    {% endif %}
+</h1>
+<a href="{% url 'actividad_create' %}" class="btn btn-primary mb-3">Agregar Actividad</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Fecha Vencimiento</th>
+            <th>Completada</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for actividad in actividades %}
+        <tr>
+            <td>{{ actividad.titulo }}</td>
+            <td>{{ actividad.descripcion }}</td>
+            <td>{{ actividad.fecha_vencimiento|date:"d/m/Y H:i" }}</td>
+            <td>{{ actividad.completada }}</td>
+            <td>
+                <a href="{% url 'actividad_update' actividad.pk %}" class="btn btn-info btn-sm">Editar</a>
+                <a href="{% url 'actividad_delete' actividad.pk %}" class="btn btn-danger btn-sm">Borrar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

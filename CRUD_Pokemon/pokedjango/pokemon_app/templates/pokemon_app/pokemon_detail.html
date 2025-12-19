@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ pokemon.name|capfirst }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="container">
+        <h1>{{ pokemon.name|capfirst }}</h1>
+        <div class="pokemon-details-container">
+            <div class="pokemon-image">
+                {% if pokemon.image_url %}
+                    <img src="{{ pokemon.image_url }}" alt="{{ pokemon.name }}">
+                {% endif %}
+            </div>
+            <div class="pokemon-info">
+                <p><strong>ID:</strong> {{ pokemon.id }}</p>
+                <p><strong>Altura:</strong> {{ pokemon.height }} metros</p>
+                <p><strong>Peso:</strong> {{ pokemon.weight }} kg</p>
+                <p><strong>Experiencia Base:</strong> {{ pokemon.base_experience }}</p>
+            </div>
+        </div>
+        <div class="actions">
+            <a class="button" href="{% url 'pokemon_update' pokemon.pk %}">Editar</a>
+            <a class="button delete" href="{% url 'pokemon_delete' pokemon.pk %}">Eliminar</a>
+            <a class="button lista" href="{% url 'pokemon_list' %}">Volver a la lista</a>
+        </div>
+    </div>
+</body>
+</html>
+

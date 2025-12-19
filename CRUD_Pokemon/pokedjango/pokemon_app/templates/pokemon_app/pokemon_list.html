@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Pokémon</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% include 'header.html' %}
+    <h1 align="center">POKÉMON REGISTRADOS</h1>
+    <br><br>
+
+    <table border="3" style="margin: auto">
+        {% for pokemon in pokemons %}
+            {% if forloop.first or forloop.counter0|divisibleby:6 %}
+        <tr>
+            {% endif %}
+
+            <td align="center" style="padding-bottom: 20px">
+                <a href="{% url 'pokemon_detail' pokemon.pk %}">
+                    <img height="200px" width="200px" src="{{ pokemon.image_url }}" alt="{{ pokemon.name }}"><br>
+                </a>
+                {{ pokemon.name|capfirst }}
+            </td>
+
+            {% if forloop.counter|divisibleby:6 or forloop.last %}
+        </tr>
+            {% endif %}
+        {% empty %}
+        <tr><td>No hay Pokémon registrados.</td></tr>
+        {% endfor %}
+    </table>
+    <br>
+    <br>
+</body>
+</html>
+

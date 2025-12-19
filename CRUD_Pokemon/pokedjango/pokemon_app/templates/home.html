@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% include 'header.html' %}
+    
+    <!-- Contenedor del video -->
+    <div class="video-container">
+        <video class="video-background" autoplay loop muted>
+            <source src="https://ia800301.us.archive.org/1/items/PokemonOriginalIntro/Pokemon%20Original%20Intro.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <audio autoplay loop>
+        <source src="https://www.televisiontunes.com/uploads/audio/Pokemon.mp3" type="audio/mpeg">
+        Tu navegador no soporta la etiqueta de audio.
+    </audio>
+</body>
+</html>
+
+
