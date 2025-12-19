@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "Spider-Man: Sin Camino a Casa",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB9QuTcB7u3WL6hGVdbElG8r9JRa0iBJRcvQ&s",
+    "description": "Peter Parker enfrenta su mayor reto multiversal."
+  },
+  {
+    "id": 2,
+    "title": "Intensamente 2",
+    "image": "https://storage.lacapitalmdp.com/2024/06/intensamente-2-1024x655.jpg",
+    "description": "Nuevas emociones aparecen en la vida de Riley."
+  },
+  {
+    "id": 3,
+    "title": "El Señor de los Anillos",
+    "image": "https://alfabetajuega.com/hero/2024/02/picsart_24-02-01_17-59-17-181.jpg?width=768&aspect_ratio=16:9&format=nowebp",
+    "description": "La épica lucha por la Tierra Media continúa."
+  },
+  {
+    "id": 4,
+    "title": "Avengers: Endgame",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1vkeMTR0ewQpdhg5HTnsxAzGQovNh6UYqIQ&s",
+    "description": "Los Vengadores se enfrentan al destino final."
+  },
+  {
+    "id": 5,
+    "title": "Toy Story 4",
+    "image": "https://www.elespectador.com/resizer/v2/52CGLQ34SZBCBM7JGCQJUXXGKA.jpg?auth=f55997fd0006efaa28d1c5708e723b25568086a301909ec4e7d41485a2130c12&width=910&height=606&smart=true&quality=70",
+    "description": "Woody y Buzz viven una nueva aventura animada."
+  },
+  {
+    "id": 6,
+    "title": "Joker",
+    "image": "https://hips.hearstapps.com/hmg-prod/images/joker-joaquin-phoenix-heroe-villano-1567430480.jpg?crop=0.6666666666666666xw:1xh;center,top&resize=640:*",
+    "description": "Un vistazo profundo al origen del villano."
+  },
+  {
+    "id": 7,
+    "title": "Frozen II",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdRhC9vVhw9pCq1C4nFkJFM4cT_D0z4PIWaA&s",
+    "description": "Elsa y Anna descubren el origen de sus poderes."
+  },
+  {
+    "id": 8,
+    "title": "Barbie",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxkgOw7AAAKKjxhBvyLho_Aq-znMvweqLHqg&s",
+    "description": "Una aventura inesperada fuera de Barbieland."
+  }
+]
